@@ -1,4 +1,4 @@
 # invoice-reminder
 InvoiceReminder
 
-Android application which remind the user about unpaid invoices
+Android application to remind the user about unpaid invoices
