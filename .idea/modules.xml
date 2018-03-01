@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/InvoiceReminder.iml" filepath="$PROJECT_DIR$/InvoiceReminder.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../../rafal/work/Android/InvoiceReminder/InvoiceReminder.iml" filepath="$PROJECT_DIR$/../../../../rafal/work/Android/InvoiceReminder/InvoiceReminder.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../../rafal/work/Android/InvoiceReminder/app/app.iml" filepath="$PROJECT_DIR$/../../../../rafal/work/Android/InvoiceReminder/app/app.iml" />
     </modules>
   </component>
 </project>
