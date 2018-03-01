@@ -1,6 +1,7 @@
 package com.zubala.rafal.invoicereminder;
 
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.LoaderManager;
@@ -15,6 +16,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.zubala.rafal.invoicereminder.data.InvoiceContract;
+import com.zubala.rafal.invoicereminder.data.InvoiceDbHelper;
+import com.zubala.rafal.invoicereminder.data.TestUtil;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -42,6 +45,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             public void onClick(View view) {
             }
         });
+
+        //TODO only for tests
+        InvoiceDbHelper dbHelper = new InvoiceDbHelper(this);
+        SQLiteDatabase mDb = dbHelper.getWritableDatabase();
+        TestUtil.insertFakeData(mDb);
 
         getSupportLoaderManager().initLoader(INVOICE_LOADER_ID, null, this);
     }

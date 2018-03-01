@@ -23,9 +23,9 @@ public class InvoiceDbHelper extends SQLiteOpenHelper {
         final String CREATE_TABLE = "CREATE TABLE "  + InvoiceContract.InvoiceEntry.TABLE_NAME + " (" +
                 InvoiceContract.InvoiceEntry._ID                + " INTEGER PRIMARY KEY, " +
                 InvoiceContract.InvoiceEntry.COLUMN_DESCRIPTION + " TEXT NOT NULL, " +
-                InvoiceContract.InvoiceEntry.COLUMN_AMOUNT      + " REAL NOT NULL" +
-                InvoiceContract.InvoiceEntry.COLUMN_CURRENCY    + " TEXT " +
-                InvoiceContract.InvoiceEntry.COLUMN_DATE        + " INTEGER NOT NULL" +
+                InvoiceContract.InvoiceEntry.COLUMN_AMOUNT      + " REAL NOT NULL, " +
+                InvoiceContract.InvoiceEntry.COLUMN_CURRENCY    + " TEXT, " +
+                InvoiceContract.InvoiceEntry.COLUMN_DATE        + " INTEGER NOT NULL, " +
                 InvoiceContract.InvoiceEntry.COLUMN_PAID        + " BOOLEAN " +
                 ");";
 
