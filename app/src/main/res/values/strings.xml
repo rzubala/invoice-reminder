@@ -8,6 +8,7 @@
     <string name="amount_label">Invoice amount</string>
     <string name="currency_label">Currency</string>
     <string name="default_currency">EUR</string>
+    <string name="paid_label">Paid</string>
     <string name="pref_show_paid_key" translatable="false">show_paid</string>
     <string name="pref_show_true">Shown</string>
     <string name="pref_show_false">Hidden</string>
