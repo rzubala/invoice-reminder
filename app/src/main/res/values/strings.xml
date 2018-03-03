@@ -13,4 +13,8 @@
     <string name="pref_show_true">Shown</string>
     <string name="pref_show_false">Hidden</string>
     <string name="add">Add</string>
+
+    <string name="newInvoiceError">Please provide correct data</string>
+    <string name="invoiceAmountError">Amount not valid</string>
+    <string name="dateFormat">MM/dd/yyyy</string>
 </resources>

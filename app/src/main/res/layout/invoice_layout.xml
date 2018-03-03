@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:background="@drawable/invoice_list_selector"
     tools:context="com.zubala.rafal.invoicereminder.MainActivity">
 
     <LinearLayout android:layout_width="match_parent"
@@ -12,8 +13,7 @@
         android:paddingTop="24dp"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingBottom="8dp"
-        android:background="@drawable/list_item_selector">
+        android:paddingBottom="8dp">
 
         <TextView
             android:id="@+id/invoiceDescription"

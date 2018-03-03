@@ -53,7 +53,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         //TODO only for tests
         InvoiceDbHelper dbHelper = new InvoiceDbHelper(this);
         SQLiteDatabase mDb = dbHelper.getWritableDatabase();
+        /*
         TestUtil.insertFakeData(mDb);
+        */
+        TestUtil.clearData(mDb);
 
         getSupportLoaderManager().initLoader(INVOICE_LOADER_ID, null, this);
     }

@@ -1,6 +1,9 @@
 package com.zubala.rafal.invoicereminder;
 
 import android.app.DatePickerDialog;
+import android.content.ContentValues;
+import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -9,16 +12,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.zubala.rafal.invoicereminder.data.InvoiceContract;
+import com.zubala.rafal.invoicereminder.databinding.ActivityInvoiceBinding;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class InvoiceActivity extends AppCompatActivity {
 
-    private EditText dateField;
-
     private Calendar myCalendar;
+
+    ActivityInvoiceBinding mBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +39,9 @@ public class InvoiceActivity extends AppCompatActivity {
         }
 
         myCalendar = Calendar.getInstance();
-        dateField = (EditText) findViewById(R.id.dateField);
+
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_invoice);
+
         attachDatePicker();
     }
 
@@ -46,7 +56,7 @@ public class InvoiceActivity extends AppCompatActivity {
             }
 
         };
-        dateField.setOnClickListener(new View.OnClickListener() {
+        mBinding.dateField.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new DatePickerDialog(InvoiceActivity.this, date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
@@ -55,9 +65,8 @@ public class InvoiceActivity extends AppCompatActivity {
     }
 
     private void updateDateField() {
-        String myFormat = "dd/MM/yy";
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-        dateField.setText(sdf.format(myCalendar.getTime()));
+        SimpleDateFormat sdf = new SimpleDateFormat(getString(R.string.dateFormat), Locale.getDefault());
+        mBinding.dateField.setText(sdf.format(myCalendar.getTime()));
     }
 
     @Override
@@ -70,21 +79,34 @@ public class InvoiceActivity extends AppCompatActivity {
     }
 
     public void onClickAddInvoice(View view) {
-        /*
-        String input = ((EditText) findViewById(R.id.editTextTaskDescription)).getText().toString();
-        if (input.length() == 0) {
+        String dateStr = mBinding.dateField.getText().toString();
+        String description = mBinding.descriptionField.getText().toString();
+        String amountStr = mBinding.numberField.getText().toString();
+        String currency = mBinding.currencyField.getText().toString();
+        boolean paid = mBinding.checkBox.isChecked();
+
+        if (dateStr.isEmpty() || description.isEmpty() || amountStr.isEmpty()) {
+            Toast.makeText(getBaseContext(), getString(R.string.newInvoiceError), Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        Double amount = null;
+        try {
+            amount = Double.valueOf(amountStr);
+        } catch (Exception ex) {
+            Toast.makeText(getBaseContext(), getString(R.string.invoiceAmountError), Toast.LENGTH_LONG).show();
             return;
         }
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(TaskContract.TaskEntry.COLUMN_DESCRIPTION, input);
-        contentValues.put(TaskContract.TaskEntry.COLUMN_PRIORITY, mPriority);
+        contentValues.put(InvoiceContract.InvoiceEntry.COLUMN_DATE, dateStr);
+        contentValues.put(InvoiceContract.InvoiceEntry.COLUMN_DESCRIPTION, description);
+        contentValues.put(InvoiceContract.InvoiceEntry.COLUMN_CURRENCY, currency);
+        contentValues.put(InvoiceContract.InvoiceEntry.COLUMN_AMOUNT, amount);
+        contentValues.put(InvoiceContract.InvoiceEntry.COLUMN_PAID, paid);
 
-        Uri uri = getContentResolver().insert(TaskContract.TaskEntry.CONTENT_URI, contentValues);
-        if(uri != null) {
-            Toast.makeText(getBaseContext(), uri.toString(), Toast.LENGTH_LONG).show();
-        }
-        */
+        Uri uri = getContentResolver().insert(InvoiceContract.InvoiceEntry.CONTENT_URI, contentValues);
+
         finish();
     }
 }

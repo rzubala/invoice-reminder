@@ -42,4 +42,20 @@ public class TestUtil {
             db.endTransaction();
         }
     }
+
+    public static void clearData(SQLiteDatabase db) {
+        if (db == null) {
+            return;
+        }
+        try {
+            db.beginTransaction();
+            db.delete (InvoiceContract.InvoiceEntry.TABLE_NAME,null,null);
+            db.setTransactionSuccessful();
+        }
+        catch (SQLException e) {
+        }
+        finally {
+            db.endTransaction();
+        }
+    }
 }
