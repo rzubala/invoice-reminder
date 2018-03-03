@@ -2,4 +2,5 @@
 <resources>
     <string name="app_name">Przypominacz o płatnościach</string>
     <string name="action_settings">Ustawienie</string>
+    <string name="invoice">Faktura</string>
 </resources>

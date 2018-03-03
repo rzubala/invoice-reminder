@@ -1,5 +1,7 @@
 package com.zubala.rafal.invoicereminder;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -43,6 +45,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent startInvoiceActivity = new Intent(MainActivity.this, InvoiceActivity.class);
+                startActivity(startInvoiceActivity);
             }
         });
 

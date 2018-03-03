@@ -18,11 +18,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".InvoiceActivity"
+            android:parentActivityName=".MainActivity"
+            android:label="@string/invoice">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
 
         <provider
-            android:name="com.zubala.rafal.invoicereminder.data.InvoiceContentProvider"
+            android:name=".data.InvoiceContentProvider"
             android:authorities="com.zubala.rafal.invoicereminder"
-            android:exported="false"/>
+            android:exported="false" />
 
     </application>
 
