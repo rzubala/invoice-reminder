@@ -18,17 +18,17 @@ import android.widget.Toast;
 public class SettingsFragment extends PreferenceFragmentCompat implements OnSharedPreferenceChangeListener, Preference.OnPreferenceChangeListener {
 
     @Override
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        addPreferencesFromResource(R.xml.pref_invoice);
+    }
+
+    @Override
     public boolean onPreferenceChange(Preference preference, Object o) {
-        return false;
+        return true;
     }
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
-        
-    }
-
-    @Override
-    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 
     }
 }

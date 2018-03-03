@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Przypominacz o płatnościach</string>
-    <string name="action_settings">Ustawienie</string>
+    <string name="action_settings">Ustawienia</string>
     <string name="invoice">Faktura</string>
+    <string name="pref_show_paid_label">Pokaż zapłacone</string>
+
+    <string name="pref_show_true">Wyświetlone</string>
+    <string name="pref_show_false">Ukryte</string>
 </resources>
