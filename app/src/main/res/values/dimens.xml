@@ -4,4 +4,8 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <dimen name="activity_vertical_margin_group">32dp</dimen>
+
+    <dimen name="activity_vertical_currency">120dp</dimen>
+    <dimen name="activity_vertical_amount_right_margin">136dp</dimen>
+
 </resources>

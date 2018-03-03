@@ -3,8 +3,11 @@
     <string name="action_settings">Settings</string>
     <string name="invoice">Invoice</string>
     <string name="pref_show_paid_label">Show paid</string>
-    <string name="date_label">Invoice date:</string>
-    <string name="desciption_label">Invoice desciption:</string>
+    <string name="date_label">Invoice date</string>
+    <string name="desciption_label">Invoice desciption</string>
+    <string name="amount_label">Invoice amount</string>
+    <string name="currency_label">Currency</string>
+    <string name="default_currency">EUR</string>
     <string name="pref_show_paid_key" translatable="false">show_paid</string>
     <string name="pref_show_true">Shown</string>
     <string name="pref_show_false">Hidden</string>
