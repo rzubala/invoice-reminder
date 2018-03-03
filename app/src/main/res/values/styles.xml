@@ -15,7 +15,12 @@
 
     <style name="InvoiceLabelStyle">
         <item name="android:textSize">20sp</item>
-        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textColor">@android:color/primary_text_light</item>
+    </style>
+
+    <style name="InvoiceListStyle">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@android:color/primary_text_light</item>
     </style>
 
 </resources>

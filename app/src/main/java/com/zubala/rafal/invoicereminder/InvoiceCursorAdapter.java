@@ -36,15 +36,23 @@ public class InvoiceCursorAdapter extends RecyclerView.Adapter<InvoiceCursorAdap
         int descriptionIndex = mCursor.getColumnIndex(InvoiceContract.InvoiceEntry.COLUMN_DESCRIPTION);
         int amountIndex = mCursor.getColumnIndex(InvoiceContract.InvoiceEntry.COLUMN_AMOUNT);
         int dateIndex = mCursor.getColumnIndex(InvoiceContract.InvoiceEntry.COLUMN_DATE);
+        int currencyIndex = mCursor.getColumnIndex(InvoiceContract.InvoiceEntry.COLUMN_CURRENCY);
+        int paidIndex = mCursor.getColumnIndex(InvoiceContract.InvoiceEntry.COLUMN_PAID);
 
         mCursor.moveToPosition(position);
 
         final int id = mCursor.getInt(idIndex);
         String description = mCursor.getString(descriptionIndex);
         Double amount = mCursor.getDouble(amountIndex);
+        String dateStr = mCursor.getString(dateIndex);
+        String currency = mCursor.getString(currencyIndex);
 
         holder.itemView.setTag(id);
         holder.invoiceDescriptionView.setText(description);
+        holder.invoiceDateView.setText(dateStr);
+        holder.invoiceAmountView.setText(amount.toString());
+        holder.invoiceCurrencyView.setText(" "+currency);
+
     }
 
     @Override
@@ -73,6 +81,8 @@ public class InvoiceCursorAdapter extends RecyclerView.Adapter<InvoiceCursorAdap
 
         TextView invoiceAmountView;
 
+        TextView invoiceCurrencyView;
+
         TextView invoiceDateView;
 
         public InvoiceViewHolder(View itemView) {
@@ -80,6 +90,7 @@ public class InvoiceCursorAdapter extends RecyclerView.Adapter<InvoiceCursorAdap
 
             invoiceDescriptionView = (TextView) itemView.findViewById(R.id.invoiceDescription);
             invoiceAmountView = (TextView) itemView.findViewById(R.id.invoiceAmount);
+            invoiceCurrencyView = (TextView) itemView.findViewById(R.id.invoiceCurrency);
             invoiceDateView = (TextView) itemView.findViewById(R.id.invoiceDate);
         }
     }
