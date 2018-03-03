@@ -4,7 +4,9 @@
     <string name="action_settings">Ustawienia</string>
     <string name="invoice">Faktura</string>
     <string name="pref_show_paid_label">Pokaż zapłacone</string>
-
+    <string name="date_label">Data faktury:</string>
+    <string name="desciption_label">Opis faktury:</string>
     <string name="pref_show_true">Wyświetlone</string>
     <string name="pref_show_false">Ukryte</string>
+    <string name="add">Dodaj</string>
 </resources>
