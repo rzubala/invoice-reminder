@@ -6,18 +6,6 @@
     android:layout_height="match_parent"
     tools:context="com.zubala.rafal.invoicereminder.InvoiceActivity">
 
-    <TextView
-        android:id="@+id/dateLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/activity_vertical_margin"
-        android:layout_marginLeft="@dimen/activity_vertical_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:text="@string/date_label"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        style="@style/InvoiceLabelStyle"/>
-
     <EditText
         android:id="@+id/dateField"
         android:layout_width="match_parent"
@@ -28,21 +16,13 @@
         android:layout_marginTop="@dimen/activity_vertical_margin_group"
         android:ems="10"
         android:inputType="date"
+        android:clickable="true"
+        android:focusable="false"
+        android:hint="@string/date_label"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateLabel" />
-
-    <TextView
-        android:id="@+id/descriptionLabel"
-        style="@style/InvoiceLabelStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/activity_vertical_margin"
-        android:layout_marginLeft="@dimen/activity_vertical_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:text="@string/desciption_label"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateField" />
+        app:layout_constraintTop_toBottomOf="parent"
+        style="@style/InvoiceLabelStyle" />
 
     <EditText
         android:id="@+id/descriptionField"
@@ -52,9 +32,11 @@
         android:layout_marginStart="@dimen/activity_vertical_margin"
         android:layout_marginLeft="@dimen/activity_vertical_margin"
         android:layout_marginTop="@dimen/activity_vertical_margin_group"
+        android:hint="@string/desciption_label"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/dateField"
+        style="@style/InvoiceLabelStyle"/>
 
     <Button
         android:id="@+id/button"
