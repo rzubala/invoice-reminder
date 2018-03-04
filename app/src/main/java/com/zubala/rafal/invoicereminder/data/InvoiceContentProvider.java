@@ -98,25 +98,40 @@ public class InvoiceContentProvider extends ContentProvider {
     public int delete(@NonNull Uri uri, @Nullable String s, @Nullable String[] strings) {
         final SQLiteDatabase db = mInvoiceDbHelper.getWritableDatabase();
         int match = sUriMatcher.match(uri);
-        int tasksDeleted;
+        int invoicesDeleted;
         switch (match) {
             case INVOICE_WITH_ID:
                 String id = uri.getPathSegments().get(1);
-                tasksDeleted = db.delete(InvoiceContract.InvoiceEntry.TABLE_NAME, "_id=?", new String[]{id});
+                invoicesDeleted = db.delete(InvoiceContract.InvoiceEntry.TABLE_NAME, "_id=?", new String[]{id});
                 break;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
 
-        if (tasksDeleted != 0) {
+        if (invoicesDeleted != 0) {
             getContext().getContentResolver().notifyChange(uri, null);
         }
-        return tasksDeleted;
+        return invoicesDeleted;
     }
 
     @Override
     public int update(@NonNull Uri uri, @Nullable ContentValues contentValues, @Nullable String s, @Nullable String[] strings) {
-        return 0;
+        final SQLiteDatabase db = mInvoiceDbHelper.getWritableDatabase();
+        int match = sUriMatcher.match(uri);
+        int invoicesUpdated;
+        switch (match) {
+            case INVOICE_WITH_ID:
+                String id = uri.getPathSegments().get(1);
+                invoicesUpdated = db.update(InvoiceContract.InvoiceEntry.TABLE_NAME, contentValues, "_id=?", new String[]{id});
+                break;
+            default:
+                throw new UnsupportedOperationException("Unknown uri: " + uri);
+        }
+
+        if (invoicesUpdated != 0) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+        return invoicesUpdated;
     }
 
     @Nullable

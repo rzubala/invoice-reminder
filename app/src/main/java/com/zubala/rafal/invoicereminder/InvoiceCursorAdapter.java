@@ -8,7 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.zubala.rafal.invoicereminder.data.DateUtils;
 import com.zubala.rafal.invoicereminder.data.InvoiceContract;
+
+import java.util.Date;
 
 /**
  * Created by rzubala on 01.03.18.
@@ -46,12 +49,15 @@ public class InvoiceCursorAdapter extends RecyclerView.Adapter<InvoiceCursorAdap
         final int id = mCursor.getInt(idIndex);
         String description = mCursor.getString(descriptionIndex);
         Double amount = mCursor.getDouble(amountIndex);
-        String dateStr = mCursor.getString(dateIndex);
+        Long timestamp = mCursor.getLong(dateIndex);
         String currency = mCursor.getString(currencyIndex);
+
+        Date date = new Date();
+        date.setTime(timestamp);
 
         holder.itemView.setTag(id);
         holder.invoiceDescriptionView.setText(description);
-        holder.invoiceDateView.setText(dateStr);
+        holder.invoiceDateView.setText(DateUtils.formatDate(mContext, date));
         holder.invoiceAmountView.setText(amount.toString());
         holder.invoiceCurrencyView.setText(" "+currency);
     }
