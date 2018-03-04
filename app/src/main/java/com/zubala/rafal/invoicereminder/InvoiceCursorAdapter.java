@@ -97,10 +97,12 @@ public class InvoiceCursorAdapter extends RecyclerView.Adapter<InvoiceCursorAdap
             invoiceAmountView = (TextView) itemView.findViewById(R.id.invoiceAmount);
             invoiceCurrencyView = (TextView) itemView.findViewById(R.id.invoiceCurrency);
             invoiceDateView = (TextView) itemView.findViewById(R.id.invoiceDate);
+
+            itemView.setOnClickListener(this);
         }
 
         @Override
-        public void onClick(View v) {
+        public void onClick(View itemView) {
             int adapterPosition = getAdapterPosition();
             mCursor.moveToPosition(adapterPosition);
             int idIndex = mCursor.getColumnIndex(InvoiceContract.InvoiceEntry._ID);

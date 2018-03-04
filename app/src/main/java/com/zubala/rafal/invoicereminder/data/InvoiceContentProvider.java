@@ -52,11 +52,20 @@ public class InvoiceContentProvider extends ContentProvider {
                         selectionArgs,
                         null,
                         null,
-                        sortOrder);
+                        InvoiceContract.InvoiceEntry.COLUMN_DATE + " ASC");
                 break;
             case INVOICE_WITH_ID:
-                //TODO INVOICE_WITH_ID
-                throw new UnsupportedOperationException("Unknown uri: " + uri);
+                String idString = uri.getLastPathSegment();
+                String[] selectionArguments = new String[]{idString};
+                retCursor = db.query(
+                        InvoiceContract.InvoiceEntry.TABLE_NAME,
+                        projection,
+                        InvoiceContract.InvoiceEntry._ID + " = ? ",
+                        selectionArguments,
+                        null,
+                        null,
+                        InvoiceContract.InvoiceEntry.COLUMN_DATE + " ASC");
+                break;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }

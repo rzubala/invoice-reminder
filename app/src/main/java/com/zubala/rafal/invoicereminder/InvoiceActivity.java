@@ -8,6 +8,7 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
@@ -28,6 +29,10 @@ public class InvoiceActivity extends AppCompatActivity {
 
     ActivityInvoiceBinding mBinding;
 
+    private Uri mUri;
+
+    private static final String TAG = InvoiceActivity.class.getSimpleName();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +46,13 @@ public class InvoiceActivity extends AppCompatActivity {
         myCalendar = Calendar.getInstance();
 
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_invoice);
+
+        mUri = getIntent().getData();
+        if (mUri == null) {
+            Log.d(TAG, "mURI null");
+        } else {
+            Log.d(TAG, "mURI: " + mUri.toString());
+        }
 
         attachDatePicker();
     }

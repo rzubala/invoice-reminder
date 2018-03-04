@@ -42,7 +42,7 @@ public class MainActivity
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerViewInvoices);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new InvoiceCursorAdapter(this);
+        mAdapter = new InvoiceCursorAdapter(this, this);
         mRecyclerView.setAdapter(mAdapter);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
