@@ -3,6 +3,8 @@ package com.zubala.rafal.invoicereminder.data;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Created by rzubala on 01.03.18.
  */
@@ -28,5 +30,28 @@ public class InvoiceContract {
         public static final String COLUMN_DATE = "date";
 
         public static final String COLUMN_PAID = "paid";
+
+        public static final long DAY_IN_MILLIS = TimeUnit.DAYS.toMillis(1);
+
+        public static Uri buildWeatherUriWithId(long id) {
+            return CONTENT_URI.buildUpon()
+                    .appendPath(""+id)
+                    .build();
+        }
+
+        public static String getSqlSelectForTodayOnwards() {
+            long normalizedUtcNow = normalizeDate(System.currentTimeMillis());
+            return COLUMN_DATE + " >= " + normalizedUtcNow;
+        }
+
+        public static long normalizeDate(long date) {
+            long daysSinceEpoch = elapsedDaysSinceEpoch(date);
+            long millisFromEpochToTodayAtMidnightUtc = daysSinceEpoch * DAY_IN_MILLIS;
+            return millisFromEpochToTodayAtMidnightUtc;
+        }
+
+        private static long elapsedDaysSinceEpoch(long utcDate) {
+            return TimeUnit.MILLISECONDS.toDays(utcDate);
+        }
     }
 }

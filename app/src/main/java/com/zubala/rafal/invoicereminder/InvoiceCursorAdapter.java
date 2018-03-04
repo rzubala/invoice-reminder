@@ -18,9 +18,11 @@ public class InvoiceCursorAdapter extends RecyclerView.Adapter<InvoiceCursorAdap
 
     private Cursor mCursor;
     private Context mContext;
+    final private InvoiceOnClickHandler mClickHandler;
 
-    public InvoiceCursorAdapter(Context context) {
+    public InvoiceCursorAdapter(Context context, InvoiceOnClickHandler handler) {
         this.mContext = context;
+        this.mClickHandler = handler;
     }
 
     @Override
@@ -52,7 +54,6 @@ public class InvoiceCursorAdapter extends RecyclerView.Adapter<InvoiceCursorAdap
         holder.invoiceDateView.setText(dateStr);
         holder.invoiceAmountView.setText(amount.toString());
         holder.invoiceCurrencyView.setText(" "+currency);
-
     }
 
     @Override
@@ -75,7 +76,11 @@ public class InvoiceCursorAdapter extends RecyclerView.Adapter<InvoiceCursorAdap
         return temp;
     }
 
-    class InvoiceViewHolder extends RecyclerView.ViewHolder {
+    public interface InvoiceOnClickHandler {
+        void onClick(long id);
+    }
+
+    class InvoiceViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView invoiceDescriptionView;
 
@@ -92,6 +97,15 @@ public class InvoiceCursorAdapter extends RecyclerView.Adapter<InvoiceCursorAdap
             invoiceAmountView = (TextView) itemView.findViewById(R.id.invoiceAmount);
             invoiceCurrencyView = (TextView) itemView.findViewById(R.id.invoiceCurrency);
             invoiceDateView = (TextView) itemView.findViewById(R.id.invoiceDate);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int adapterPosition = getAdapterPosition();
+            mCursor.moveToPosition(adapterPosition);
+            int idIndex = mCursor.getColumnIndex(InvoiceContract.InvoiceEntry._ID);
+            long id = mCursor.getLong(idIndex);
+            mClickHandler.onClick(id);
         }
     }
 }

@@ -54,6 +54,9 @@ public class InvoiceContentProvider extends ContentProvider {
                         null,
                         sortOrder);
                 break;
+            case INVOICE_WITH_ID:
+                //TODO INVOICE_WITH_ID
+                throw new UnsupportedOperationException("Unknown uri: " + uri);
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
