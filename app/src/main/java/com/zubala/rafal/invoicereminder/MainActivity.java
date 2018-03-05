@@ -176,9 +176,9 @@ public class MainActivity
         }
         if (!showHistory) {
             if (!selection.isEmpty()) {
-                selection += ", ";
+                selection += " and ";
             }
-            selection = InvoiceContract.InvoiceEntry.COLUMN_DATE + " > ?";
+            selection += " ( " + InvoiceContract.InvoiceEntry.COLUMN_DATE + " >= ? or " + InvoiceContract.InvoiceEntry.COLUMN_PAID + " = ? ) ";
         }
         return selection;
     }
@@ -194,6 +194,7 @@ public class MainActivity
         }
         if (!showHistory) {
             list.add(""+InvoiceContract.InvoiceEntry.getSqlSelectionForTodayOnwards());
+            list.add(""+0);
         }
         String[] selectionArguments = list.toArray(new String[list.size()]);
 
