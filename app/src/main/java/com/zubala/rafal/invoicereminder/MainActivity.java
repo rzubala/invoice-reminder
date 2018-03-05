@@ -2,6 +2,7 @@ package com.zubala.rafal.invoicereminder;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
@@ -11,6 +12,7 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -133,8 +135,8 @@ public class MainActivity
                 try {
                     return getContentResolver().query(InvoiceContract.InvoiceEntry.CONTENT_URI,
                             null,
-                            null,
-                            null,
+                            getSelectionArgs(),
+                            getSelectionArguments(),
                             InvoiceContract.InvoiceEntry.COLUMN_DATE);
                 } catch (Exception e) {
                     Log.e(TAG, "Failed to asynchronously load data.");
@@ -158,5 +160,28 @@ public class MainActivity
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         mAdapter.swapCursor(null);
+    }
+
+    private String getSelectionArgs() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean showPaid = sharedPreferences.getBoolean(getString(R.string.pref_show_paid_key), getResources().getBoolean(R.bool.pref_show_paid));
+        boolean showHistory = sharedPreferences.getBoolean(getString(R.string.pref_show_history_key), getResources().getBoolean(R.bool.pref_show_history));
+
+        String selection = "";
+        if (!showPaid) {
+            selection = InvoiceContract.InvoiceEntry.COLUMN_PAID + " = 0 ";
+        }
+
+        return selection;
+    }
+
+    private String[] getSelectionArguments() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean showPaid = sharedPreferences.getBoolean(getString(R.string.pref_show_paid_key), getResources().getBoolean(R.bool.pref_show_paid));
+        boolean showHistory = sharedPreferences.getBoolean(getString(R.string.pref_show_history_key), getResources().getBoolean(R.bool.pref_show_history));
+
+        String[] selectionArguments = new String[]{};
+
+        return selectionArguments;
     }
 }
