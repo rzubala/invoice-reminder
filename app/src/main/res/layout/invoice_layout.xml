@@ -16,7 +16,7 @@
         android:layout_marginRight="@dimen/activity_vertical_margin_double"
         android:layout_marginStart="@dimen/activity_vertical_margin_double"
         android:layout_marginLeft="@dimen/activity_vertical_margin_double"
-        android:layout_marginTop="@dimen/activity_vertical_margin_half"
+        android:layout_marginTop="@dimen/activity_vertical_margin_q"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

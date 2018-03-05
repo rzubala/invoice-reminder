@@ -1,10 +1,8 @@
 package com.zubala.rafal.invoicereminder;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -22,8 +20,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.zubala.rafal.invoicereminder.data.InvoiceContract;
-import com.zubala.rafal.invoicereminder.data.InvoiceDbHelper;
-import com.zubala.rafal.invoicereminder.data.TestUtil;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -76,15 +72,6 @@ public class MainActivity
                 getSupportLoaderManager().restartLoader(INVOICE_LOADER_ID, null, MainActivity.this);
             }
         }).attachToRecyclerView(mRecyclerView);
-
-
-        //TODO only for tests
-        /*
-        InvoiceDbHelper dbHelper = new InvoiceDbHelper(this);
-        SQLiteDatabase mDb = dbHelper.getWritableDatabase();
-        TestUtil.insertFakeData(mDb);
-        TestUtil.clearData(mDb);
-        */
 
         getSupportLoaderManager().initLoader(INVOICE_LOADER_ID, null, this);
     }
