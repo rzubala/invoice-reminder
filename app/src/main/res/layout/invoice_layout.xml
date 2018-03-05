@@ -7,6 +7,17 @@
     android:layout_height="wrap_content"
     tools:context="com.zubala.rafal.invoicereminder.MainActivity">
 
+    <ImageView
+        android:id="@+id/imageViewCheck"
+        android:layout_width="@dimen/activity_vertical_icon"
+        android:layout_height="@dimen/activity_vertical_icon"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/check"/>
+
     <TextView
         android:id="@+id/invoiceDescription"
         android:layout_width="match_parent"
@@ -14,8 +25,8 @@
         android:layout_marginBottom="@dimen/activity_vertical_margin_half"
         android:layout_marginEnd="@dimen/activity_vertical_margin_double"
         android:layout_marginRight="@dimen/activity_vertical_margin_double"
-        android:layout_marginStart="@dimen/activity_vertical_margin_double"
-        android:layout_marginLeft="@dimen/activity_vertical_margin_double"
+        android:layout_marginStart="@dimen/activity_vertical_margin_after_icon"
+        android:layout_marginLeft="@dimen/activity_vertical_margin_after_icon"
         android:layout_marginTop="@dimen/activity_vertical_margin_q"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,8 +39,8 @@
         android:id="@+id/invoiceAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/activity_vertical_margin"
-        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_marginStart="@dimen/activity_vertical_margin_after_icon"
+        android:layout_marginLeft="@dimen/activity_vertical_margin_after_icon"
         android:layout_marginTop="@dimen/activity_vertical_margin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -59,4 +70,5 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="2018.03.01"
         style="@style/InvoiceDateListStyle"/>
+
 </android.support.constraint.ConstraintLayout>

@@ -2,10 +2,12 @@ package com.zubala.rafal.invoicereminder;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zubala.rafal.invoicereminder.data.DateUtils;
@@ -91,12 +93,21 @@ public class InvoiceCursorAdapter extends RecyclerView.Adapter<InvoiceCursorAdap
         holder.invoiceAmountView.setText(amount.toString());
         holder.invoiceCurrencyView.setText(" "+currency);
 
+        int type = getItemViewType(position);
         if (paid) {
             holder.itemView.setBackgroundColor(mContext.getResources().getColor(R.color.colorPaid));
+            if (type == VIEW_TYPE_NORMAL_DAY) {
+                holder.imageViewCheck.setImageResource(R.drawable.check);
+            }
         } else {
             holder.itemView.setBackgroundColor(mContext.getResources().getColor(R.color.colorUnpaid));
+            if (type == VIEW_TYPE_NORMAL_DAY) {
+                holder.imageViewCheck.setImageResource(R.drawable.close);
+            }
         }
-
+        if (type == VIEW_TYPE_TODAY) {
+            holder.imageViewCheck.setColorFilter(mContext.getResources().getColor(R.color.colorRed));
+        }
     }
 
     @Override
@@ -133,6 +144,8 @@ public class InvoiceCursorAdapter extends RecyclerView.Adapter<InvoiceCursorAdap
 
         TextView invoiceDateView;
 
+        ImageView imageViewCheck;
+
         public InvoiceViewHolder(View itemView) {
             super(itemView);
 
@@ -140,6 +153,7 @@ public class InvoiceCursorAdapter extends RecyclerView.Adapter<InvoiceCursorAdap
             invoiceAmountView = (TextView) itemView.findViewById(R.id.invoiceAmount);
             invoiceCurrencyView = (TextView) itemView.findViewById(R.id.invoiceCurrency);
             invoiceDateView = (TextView) itemView.findViewById(R.id.invoiceDate);
+            imageViewCheck = (ImageView) itemView.findViewById(R.id.imageViewCheck);
 
             itemView.setOnClickListener(this);
         }
