@@ -51,6 +51,7 @@ public class InvoiceCursorAdapter extends RecyclerView.Adapter<InvoiceCursorAdap
         Double amount = mCursor.getDouble(amountIndex);
         Long timestamp = mCursor.getLong(dateIndex);
         String currency = mCursor.getString(currencyIndex);
+        boolean paid = mCursor.getInt(paidIndex) > 0;
 
         Date date = new Date();
         date.setTime(timestamp);
@@ -60,6 +61,13 @@ public class InvoiceCursorAdapter extends RecyclerView.Adapter<InvoiceCursorAdap
         holder.invoiceDateView.setText(DateUtils.formatDate(mContext, date));
         holder.invoiceAmountView.setText(amount.toString());
         holder.invoiceCurrencyView.setText(" "+currency);
+
+        if (paid) {
+            holder.itemView.setBackgroundColor(mContext.getResources().getColor(R.color.colorPaid));
+        } else {
+            holder.itemView.setBackgroundColor(mContext.getResources().getColor(R.color.colorUnpaid));
+        }
+
     }
 
     @Override

@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#0069c0</color>
     <color name="colorPrimaryLight">#6ec6ff</color>
     <color name="colorAccent">#FF9100</color>
+    <color name="colorPaid">#7dffd9</color>
+    <color name="colorUnpaid">#ffb4b4</color>
 </resources>
