@@ -22,6 +22,8 @@ public class InvoiceCursorAdapter extends RecyclerView.Adapter<InvoiceCursorAdap
     private Cursor mCursor;
     private Context mContext;
     final private InvoiceOnClickHandler mClickHandler;
+    private static final int VIEW_TYPE_TODAY = 0;
+    private static final int VIEW_TYPE_NORMAL_DAY = 1;
 
     public InvoiceCursorAdapter(Context context, InvoiceOnClickHandler handler) {
         this.mContext = context;
@@ -30,9 +32,36 @@ public class InvoiceCursorAdapter extends RecyclerView.Adapter<InvoiceCursorAdap
 
     @Override
     public InvoiceCursorAdapter.InvoiceViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.invoice_layout, parent, false);
-
+        int layoutId;
+        switch (viewType) {
+            case VIEW_TYPE_TODAY: {
+                layoutId = R.layout.invoice_layout_today;
+                break;
+            }
+            case VIEW_TYPE_NORMAL_DAY: {
+                layoutId = R.layout.invoice_layout;
+                break;
+            }
+            default:
+                throw new IllegalArgumentException("Invalid view type, value of " + viewType);
+        }
+        View view = LayoutInflater.from(mContext).inflate(layoutId, parent, false);
+        view.setFocusable(true);
         return new InvoiceViewHolder(view);
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        int dateIndex = mCursor.getColumnIndex(InvoiceContract.InvoiceEntry.COLUMN_DATE);
+        int paidIndex = mCursor.getColumnIndex(InvoiceContract.InvoiceEntry.COLUMN_PAID);
+        mCursor.moveToPosition(position);
+        boolean paid = mCursor.getInt(paidIndex) > 0;
+        Long timestamp = mCursor.getLong(dateIndex);
+        Long todayTimestamp = InvoiceContract.InvoiceEntry.getSqlSelectionForTodayOnwards();
+        if (!paid && timestamp <= todayTimestamp) {
+            return VIEW_TYPE_TODAY;
+        }
+        return VIEW_TYPE_NORMAL_DAY;
     }
 
     @Override

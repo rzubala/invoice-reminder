@@ -7,4 +7,5 @@
     <color name="colorPaid">#3200ff00</color>
     <color name="colorUnpaid">#32ff0000</color>
     <color name="colorGray">#636363</color>
+    <color name="colorRed">#ff0000</color>
 </resources>
