@@ -110,6 +110,15 @@ public class InvoiceActivity extends AppCompatActivity implements LoaderManager.
         return super.onOptionsItemSelected(item);
     }
 
+    public void onClickPaid(View view) {
+        boolean paid = mBinding.checkBox.isChecked();
+        if (paid) {
+            mBinding.checkBox.setText(R.string.paid_label);
+        } else {
+            mBinding.checkBox.setText(R.string.not_paid_label);
+        }
+    }
+
     public void onClickAddInvoice(View view) {
         String dateStr = mBinding.dateField.getText().toString();
         String description = mBinding.descriptionField.getText().toString();
@@ -196,6 +205,12 @@ public class InvoiceActivity extends AppCompatActivity implements LoaderManager.
         updateDateField(date);
 
         id = data.getInt(data.getColumnIndex(InvoiceContract.InvoiceEntry._ID));
+
+        if (paid) {
+            mBinding.checkBox.setText(R.string.paid_label);
+        } else {
+            mBinding.checkBox.setText(R.string.not_paid_label);
+        }
 
         Log.d(TAG, "loaded id:" + id);
     }
