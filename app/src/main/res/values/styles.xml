@@ -22,5 +22,23 @@
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@android:color/primary_text_light</item>
     </style>
+    
+    <style name="InvoiceAmountListStyle" parent="InvoiceListStyle">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="InvoiceCurrencyListStyle" parent="InvoiceListStyle">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="InvoiceDateListStyle" parent="InvoiceListStyle">
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="InvoiceDescriptionListStyle" parent="InvoiceListStyle">
+        <item name="android:textColor">@color/colorGray</item>
+        <item name="android:textStyle">italic</item>
+    </style>
 
 </resources>
