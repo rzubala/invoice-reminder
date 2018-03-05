@@ -39,9 +39,9 @@ public class InvoiceContract {
                     .build();
         }
 
-        public static String getSqlSelectForTodayOnwards() {
+        public static long getSqlSelectionForTodayOnwards() {
             long normalizedUtcNow = normalizeDate(System.currentTimeMillis());
-            return COLUMN_DATE + " >= " + normalizedUtcNow;
+            return normalizedUtcNow;
         }
 
         public static long normalizeDate(long date) {

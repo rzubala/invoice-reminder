@@ -25,6 +25,9 @@ import com.zubala.rafal.invoicereminder.data.InvoiceContract;
 import com.zubala.rafal.invoicereminder.data.InvoiceDbHelper;
 import com.zubala.rafal.invoicereminder.data.TestUtil;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class MainActivity
         extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<Cursor>,
@@ -169,9 +172,14 @@ public class MainActivity
 
         String selection = "";
         if (!showPaid) {
-            selection = InvoiceContract.InvoiceEntry.COLUMN_PAID + " = 0 ";
+            selection = InvoiceContract.InvoiceEntry.COLUMN_PAID + " = ? ";
         }
-
+        if (!showHistory) {
+            if (!selection.isEmpty()) {
+                selection += ", ";
+            }
+            selection = InvoiceContract.InvoiceEntry.COLUMN_DATE + " > ?";
+        }
         return selection;
     }
 
@@ -180,7 +188,14 @@ public class MainActivity
         boolean showPaid = sharedPreferences.getBoolean(getString(R.string.pref_show_paid_key), getResources().getBoolean(R.bool.pref_show_paid));
         boolean showHistory = sharedPreferences.getBoolean(getString(R.string.pref_show_history_key), getResources().getBoolean(R.bool.pref_show_history));
 
-        String[] selectionArguments = new String[]{};
+        List<String> list = new LinkedList<String>();
+        if (!showPaid) {
+            list.add(""+0);
+        }
+        if (!showHistory) {
+            list.add(""+InvoiceContract.InvoiceEntry.getSqlSelectionForTodayOnwards());
+        }
+        String[] selectionArguments = list.toArray(new String[list.size()]);
 
         return selectionArguments;
     }
