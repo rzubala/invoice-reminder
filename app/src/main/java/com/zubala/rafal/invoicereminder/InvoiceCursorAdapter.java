@@ -98,11 +98,13 @@ public class InvoiceCursorAdapter extends RecyclerView.Adapter<InvoiceCursorAdap
             holder.itemView.setBackgroundColor(mContext.getResources().getColor(R.color.colorPaid));
             if (type == VIEW_TYPE_NORMAL_DAY) {
                 holder.imageViewCheck.setImageResource(R.drawable.check);
+                holder.imageViewCheck.setColorFilter(mContext.getResources().getColor(R.color.colorPrimaryDark));
             }
         } else {
             holder.itemView.setBackgroundColor(mContext.getResources().getColor(R.color.colorUnpaid));
             if (type == VIEW_TYPE_NORMAL_DAY) {
                 holder.imageViewCheck.setImageResource(R.drawable.close);
+                holder.imageViewCheck.setColorFilter(mContext.getResources().getColor(R.color.colorPrimaryDark));
             }
         }
         if (type == VIEW_TYPE_TODAY) {
