@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">Pay on time</string>
+    <string name="app_name_space"> Pay on time</string>
     <string name="action_settings">Settings</string>
     <string name="invoice">Payment</string>
+    <string name="invoice_space"> Payment</string>
     <string name="pref_show_paid_label">Show paid</string>
     <string name="date_label">Invoice date</string>
     <string name="desciption_label">Payment desciption</string>

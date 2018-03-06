@@ -60,6 +60,9 @@ public class InvoiceActivity extends AppCompatActivity implements LoaderManager.
         ActionBar actionBar = this.getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setIcon(R.drawable.ic_sale_time);
+            actionBar.setHomeButtonEnabled(true);
+            actionBar.setDisplayShowHomeEnabled(true);
         }
 
         myCalendar = Calendar.getInstance();
