@@ -21,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.zubala.rafal.invoicereminder.data.InvoiceContract;
+import com.zubala.rafal.invoicereminder.utils.NotificationUtils;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -195,5 +196,9 @@ public class MainActivity
         String[] selectionArguments = list.toArray(new String[list.size()]);
 
         return selectionArguments;
+    }
+
+    public void testNotification(View view) {
+        NotificationUtils.remindUserAboutInvoice(this);
     }
 }

@@ -25,4 +25,9 @@
     <string name="pref_show_history_key" translatable="false">show_history</string>
     <string name="pref_show_history_label">Show history</string>
     <string name="not_paid_label">Not paid</string>
+
+    <string name="reminder_notification_title">Pay on time</string>
+    <string name="reminder_notification_body">There is an invoice to be paid</string>
+    <string name="main_notification_channel_name" translatable="false">Primary</string>
+
 </resources>
