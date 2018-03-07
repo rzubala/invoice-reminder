@@ -16,6 +16,8 @@ import android.support.v4.content.ContextCompat;
 
 import com.zubala.rafal.invoicereminder.MainActivity;
 import com.zubala.rafal.invoicereminder.R;
+import com.zubala.rafal.invoicereminder.sync.InvoiceReminderIntentService;
+import com.zubala.rafal.invoicereminder.sync.ReminderTasks;
 
 public class NotificationUtils {
 
@@ -46,10 +48,8 @@ public class NotificationUtils {
                         context.getString(R.string.reminder_notification_body)))
                 .setDefaults(Notification.DEFAULT_VIBRATE)
                 .setContentIntent(contentIntent(context))
-                /*
                 .addAction(drinkWaterAction(context))
                 .addAction(ignoreReminderAction(context))
-                */
                 .setAutoCancel(true);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN
@@ -58,31 +58,31 @@ public class NotificationUtils {
         }
         notificationManager.notify(INVOICE_REMINDER_NOTIFICATION_ID, notificationBuilder.build());
     }
-/*
+
     private static Action ignoreReminderAction(Context context) {
-        Intent ignoreReminderIntent = new Intent(context, WaterReminderIntentService.class);
+        Intent ignoreReminderIntent = new Intent(context, InvoiceReminderIntentService.class);
         ignoreReminderIntent.setAction(ReminderTasks.ACTION_DISMISS_NOTIFICATION);
         PendingIntent ignoreReminderPendingIntent = PendingIntent.getService(
                 context,
                 ACTION_IGNORE_PENDING_INTENT_ID,
                 ignoreReminderIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
-        Action ignoreReminderAction = new Action(R.drawable.ic_cancel_black_24px, "No, thanks.", ignoreReminderPendingIntent);
+        Action ignoreReminderAction = new Action(R.drawable.ic_close_black_24dp, "No, thanks.", ignoreReminderPendingIntent);
         return ignoreReminderAction;
     }
 
     private static Action drinkWaterAction(Context context) {
-        Intent incrementWaterCountIntent = new Intent(context, WaterReminderIntentService.class);
-        incrementWaterCountIntent.setAction(ReminderTasks.ACTION_INCREMENT_WATER_COUNT);
+        Intent incrementWaterCountIntent = new Intent(context, InvoiceReminderIntentService.class);
+        incrementWaterCountIntent.setAction(ReminderTasks.ACTION_PAY_INVOICE);
         PendingIntent incrementWaterPendingIntent = PendingIntent.getService(
                 context,
                 ACTION_PAY_PENDING_INTENT_ID,
                 incrementWaterCountIntent,
                 PendingIntent.FLAG_CANCEL_CURRENT);
-        Action drinkWaterAction = new Action(R.drawable.ic_local_drink_black_24px, "I did it!", incrementWaterPendingIntent);
+        Action drinkWaterAction = new Action(R.drawable.ic_check_black_24dp, "I did it!", incrementWaterPendingIntent);
         return drinkWaterAction;
     }
-*/
+
     private static PendingIntent contentIntent(Context context) {
         Intent startActivityIntent = new Intent(context, MainActivity.class);
         return PendingIntent.getActivity(

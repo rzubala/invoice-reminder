@@ -45,6 +45,9 @@
             android:authorities="com.zubala.rafal.invoicereminder"
             android:exported="false" />
 
+        <service
+            android:name=".sync.InvoiceReminderIntentService"
+            android:exported="false"/>
     </application>
 
 </manifest>
