@@ -13,4 +13,19 @@
         android:summaryOff="@string/pref_show_false"
         android:summaryOn="@string/pref_show_true"
         android:title="@string/pref_show_history_label" />
+
+    <CheckBoxPreference
+        android:defaultValue="@bool/pref_show_notification"
+        android:key="@string/pref_show_notification_key"
+        android:summaryOff="@string/pref_show_false"
+        android:summaryOn="@string/pref_show_true"
+        android:title="@string/pref_show_notification_label" />
+<!--
+    <com.zubala.rafal.invoicereminder.TimePreference
+        android:key="alarm_time"
+        android:title="Lunch Alarm Time"
+        android:defaultValue="12:00"
+        android:summary="Set your desired time for the lunch alarm"
+        android:dependency="alarm" />
+-->
 </PreferenceScreen>

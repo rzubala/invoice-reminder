@@ -2,4 +2,5 @@
 <resources>
     <bool name="pref_show_paid">true</bool>
     <bool name="pref_show_history">false</bool>
+    <bool name="pref_show_notification">false</bool>
 </resources>

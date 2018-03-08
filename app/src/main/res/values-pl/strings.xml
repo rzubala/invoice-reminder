@@ -21,6 +21,7 @@
     <string name="newDateError">Niepoprawna data</string>
     <string name="show_history">Pokaż historię</string>
     <string name="pref_show_history_label">Pokaż historię</string>
+    <string name="pref_show_notification_label">Pokaż powiadomienia</string>
     <string name="not_paid_label">Brak zapłaty</string>
     <string name="app_name_space">" Zapłać na czas"</string>
     <string name="invoice_space">" Płatność"</string>
@@ -28,4 +29,7 @@
     <string name="reminder_notification_body">Faktura do zapłacenia:</string>
     <string name="action_pay">Zaznacz płatność</string>
     <string name="action_cancel">Ignoruj</string>
+    <string name="set">Ustaw</string>
+    <string name="cancel">Anuluj</string>
+
 </resources>
