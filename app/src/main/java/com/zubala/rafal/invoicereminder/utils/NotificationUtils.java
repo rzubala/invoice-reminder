@@ -108,8 +108,9 @@ public class NotificationUtils {
     }
 
     private static PendingIntent contentIntent(Context context) {
-        Intent startActivityIntent = new Intent(context, MainActivity.class);
-        return PendingIntent.getActivity(
+        Intent startActivityIntent = new Intent(context, InvoiceReminderIntentService.class);
+        startActivityIntent.setAction(ReminderTasks.ACTION_OPEN_PAY_ON_TIME);
+        return PendingIntent.getService(
                 context,
                 INVOICE_REMINDER_PENDING_INTENT_ID,
                 startActivityIntent,

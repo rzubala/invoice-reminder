@@ -38,7 +38,7 @@ public class AlarmUtils {
 
         int interval = 1000 * 60 * 20; //TODO 24h
         int hour = 12;   //TODO pref
-        int minute = 49; //TODO pref
+        int minute = 57; //TODO pref
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());

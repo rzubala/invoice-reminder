@@ -37,6 +37,7 @@ import java.util.List;
 public class ReminderTasks {
 
     public static final String ACTION_PAY_INVOICE = "pay-invoice";
+    public static final String ACTION_OPEN_PAY_ON_TIME = "open-pay-on-time";
     public static final String ACTION_DISMISS_NOTIFICATION = "dismiss-notification";
     public static final String ACTION_CHECK_INVOICE_FOR_NOTIFICATION = "check-invoice-notification";
     private static final String TAG = ReminderTasks.class.getSimpleName();
@@ -49,6 +50,10 @@ public class ReminderTasks {
         } else if (ACTION_CHECK_INVOICE_FOR_NOTIFICATION.equals(action)) {
             Log.d(TAG, "Check for invoices for notification");
             checkInvoicesForNotification(context, uri);
+        } else if (ACTION_OPEN_PAY_ON_TIME.equals(action)) {
+            Intent mainIntent = new Intent(context, MainActivity.class);
+            context.startActivity(mainIntent);
+            NotificationUtils.clearAllNotifications(context);
         }
     }
 
