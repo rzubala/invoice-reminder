@@ -33,7 +33,7 @@ public class InvoiceContract {
 
         public static final long DAY_IN_MILLIS = TimeUnit.DAYS.toMillis(1);
 
-        public static Uri buildWeatherUriWithId(long id) {
+        public static Uri buildInvoiceUriWithId(long id) {
             return CONTENT_URI.buildUpon()
                     .appendPath(""+id)
                     .build();

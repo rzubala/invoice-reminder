@@ -89,7 +89,7 @@ public class MainActivity
     @Override
     public void onClick(long id) {
         Intent invoiceDetailIntent = new Intent(MainActivity.this, InvoiceActivity.class);
-        Uri uriForInvoiceClicked = InvoiceContract.InvoiceEntry.buildWeatherUriWithId(id);
+        Uri uriForInvoiceClicked = InvoiceContract.InvoiceEntry.buildInvoiceUriWithId(id);
         invoiceDetailIntent.setData(uriForInvoiceClicked);
         startActivity(invoiceDetailIntent);
     }

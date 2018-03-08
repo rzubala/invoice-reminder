@@ -44,16 +44,13 @@ public class NotificationUtils {
                 .setLargeIcon(largeIcon(context))
                 .setContentTitle(context.getString(R.string.reminder_notification_title))
                 .setContentText(context.getString(R.string.reminder_notification_body))
-                .setStyle(new NotificationCompat.BigTextStyle().bigText(
-                        context.getString(R.string.reminder_notification_body)))
-                .setDefaults(Notification.DEFAULT_VIBRATE)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(context.getString(R.string.reminder_notification_body)))
                 .setContentIntent(contentIntent(context))
                 .addAction(drinkWaterAction(context))
                 .addAction(ignoreReminderAction(context))
                 .setAutoCancel(true);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN
-                && Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN && Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
             notificationBuilder.setPriority(NotificationCompat.PRIORITY_HIGH);
         }
         notificationManager.notify(INVOICE_REMINDER_NOTIFICATION_ID, notificationBuilder.build());
@@ -67,7 +64,7 @@ public class NotificationUtils {
                 ACTION_IGNORE_PENDING_INTENT_ID,
                 ignoreReminderIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
-        Action ignoreReminderAction = new Action(R.drawable.ic_close_black_24dp, "No, thanks.", ignoreReminderPendingIntent);
+        Action ignoreReminderAction = new Action(R.drawable.ic_close_black_24dp, context.getString(R.string.action_cancel), ignoreReminderPendingIntent);
         return ignoreReminderAction;
     }
 
@@ -79,7 +76,7 @@ public class NotificationUtils {
                 ACTION_PAY_PENDING_INTENT_ID,
                 incrementWaterCountIntent,
                 PendingIntent.FLAG_CANCEL_CURRENT);
-        Action drinkWaterAction = new Action(R.drawable.ic_check_black_24dp, "I did it!", incrementWaterPendingIntent);
+        Action drinkWaterAction = new Action(R.drawable.ic_check_black_24dp, context.getString(R.string.action_pay), incrementWaterPendingIntent);
         return drinkWaterAction;
     }
 

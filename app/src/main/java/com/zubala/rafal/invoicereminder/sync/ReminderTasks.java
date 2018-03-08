@@ -16,7 +16,12 @@
 package com.zubala.rafal.invoicereminder.sync;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 
+import com.zubala.rafal.invoicereminder.InvoiceActivity;
+import com.zubala.rafal.invoicereminder.MainActivity;
+import com.zubala.rafal.invoicereminder.data.InvoiceContract;
 import com.zubala.rafal.invoicereminder.utils.NotificationUtils;
 
 public class ReminderTasks {
@@ -33,6 +38,11 @@ public class ReminderTasks {
     }
 
     private static void payInvoice(Context context) {
+        Intent invoiceDetailIntent = new Intent(context, InvoiceActivity.class);
+        //Uri uriForInvoiceClicked = InvoiceContract.InvoiceEntry.buildInvoiceUriWithId(id);
+        //invoiceDetailIntent.setData(uriForInvoiceClicked);
+        context.startActivity(invoiceDetailIntent);
+
         NotificationUtils.clearAllNotifications(context);
     }
 }

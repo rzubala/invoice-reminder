@@ -26,4 +26,6 @@
     <string name="invoice_space">" Płatność"</string>
     <string name="reminder_notification_title">Zapłać na czas</string>
     <string name="reminder_notification_body">Jest faktura za zapłacenia</string>
+    <string name="action_pay">Zaznacz płatność</string>
+    <string name="action_cancel">Ignoruj</string>
 </resources>
