@@ -156,6 +156,8 @@ public class MainActivity
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         mAdapter.swapCursor(data);
+
+        AlarmUtils.startAlarm(this);
     }
 
     @Override
@@ -197,10 +199,5 @@ public class MainActivity
         String[] selectionArguments = list.toArray(new String[list.size()]);
 
         return selectionArguments;
-    }
-
-    public void testNotification(View view) {
-        //NotificationUtils.remindUserAboutInvoice(this, 3L);
-        AlarmUtils.startAlarm(this);
     }
 }
