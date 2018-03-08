@@ -75,10 +75,7 @@ public class ReminderTasks {
         int size = cursor.getCount();
         for (int i=0;i<size;i++) {
             cursor.moveToPosition(i);
-            Integer id = cursor.getInt(cursor.getColumnIndex(InvoiceContract.InvoiceEntry._ID));
-            if (id != null) {
-                NotificationUtils.remindUserAboutInvoice(context, id);
-            }
+            NotificationUtils.remindUserAboutInvoice(context, cursor);
         }
     }
 

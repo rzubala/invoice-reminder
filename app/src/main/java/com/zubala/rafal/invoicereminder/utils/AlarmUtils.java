@@ -37,8 +37,8 @@ public class AlarmUtils {
                 PendingIntent.FLAG_UPDATE_CURRENT);
 
         int interval = 1000 * 60 * 20; //TODO 24h
-        int hour = 11;   //TODO pref
-        int minute = 51; //TODO pref
+        int hour = 12;   //TODO pref
+        int minute = 49; //TODO pref
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());

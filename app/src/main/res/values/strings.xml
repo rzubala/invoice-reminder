@@ -27,7 +27,7 @@
     <string name="not_paid_label">Not paid</string>
 
     <string name="reminder_notification_title">Pay on time</string>
-    <string name="reminder_notification_body">There is an invoice to be paid</string>
+    <string name="reminder_notification_body">An invoice to be paid:</string>
     <string name="main_notification_channel_name" translatable="false">Primary</string>
     <string name="action_pay">Mark as paid</string>
     <string name="action_cancel">Cancel</string>
