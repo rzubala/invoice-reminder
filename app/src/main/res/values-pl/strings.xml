@@ -29,7 +29,6 @@
     <string name="reminder_notification_body">Faktura do zapłacenia:</string>
     <string name="action_pay">Zaznacz płatność</string>
     <string name="action_cancel">Ignoruj</string>
-    <string name="set">Ustaw</string>
-    <string name="cancel">Anuluj</string>
+    <string name="pref_notification_time_label">Czas powiadomień</string>
 
 </resources>

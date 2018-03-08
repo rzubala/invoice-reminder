@@ -2,98 +2,54 @@ package com.zubala.rafal.invoicereminder;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.preference.DialogPreference;
-import android.text.format.DateFormat;
+import android.support.v7.preference.DialogPreference;
 import android.util.AttributeSet;
-import android.view.View;
-import android.widget.TimePicker;
-
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 /**
  * Created by kolarz on 08.03.18.
  */
 
 public class TimePreference extends DialogPreference {
-    private Calendar calendar;
-    private TimePicker picker = null;
+    private int mTime;
+    private int mDialogLayoutResId = R.layout.pref_dialog_time;
 
-    public TimePreference(Context ctxt) {
-        this(ctxt, null);
+    public TimePreference(Context context) {
+        this(context, null);
     }
 
-    public TimePreference(Context ctxt, AttributeSet attrs) {
-        this(ctxt, attrs, android.R.attr.dialogPreferenceStyle);
+    public TimePreference(Context context, AttributeSet attrs) {
+        this(context, attrs, R.attr.preferenceStyle);
     }
 
-    public TimePreference(Context ctxt, AttributeSet attrs, int defStyle) {
-        super(ctxt, attrs, defStyle);
-
-        setPositiveButtonText(R.string.set);
-        setNegativeButtonText(R.string.cancel);
-        calendar = new GregorianCalendar();
+    public TimePreference(Context context, AttributeSet attrs, int defStyleAttr) {
+        this(context, attrs, defStyleAttr, defStyleAttr);
     }
 
-    @Override
-    protected View onCreateDialogView() {
-        picker = new TimePicker(getContext());
-        return (picker);
+    public TimePreference(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
     }
 
-    @Override
-    protected void onBindDialogView(View v) {
-        super.onBindDialogView(v);
-        picker.setCurrentHour(calendar.get(Calendar.HOUR_OF_DAY));
-        picker.setCurrentMinute(calendar.get(Calendar.MINUTE));
+    public int getTime() {
+        return mTime;
     }
 
-    @Override
-    protected void onDialogClosed(boolean positiveResult) {
-        super.onDialogClosed(positiveResult);
-
-        if (positiveResult) {
-            calendar.set(Calendar.HOUR_OF_DAY, picker.getCurrentHour());
-            calendar.set(Calendar.MINUTE, picker.getCurrentMinute());
-
-            setSummary(getSummary());
-            if (callChangeListener(calendar.getTimeInMillis())) {
-                persistLong(calendar.getTimeInMillis());
-                notifyChanged();
-            }
-        }
+    public void setTime(int time) {
+        mTime = time;
+        persistInt(time);
     }
 
     @Override
     protected Object onGetDefaultValue(TypedArray a, int index) {
-        return (a.getString(index));
+        return a.getInt(index, 0);
     }
 
     @Override
-    protected void onSetInitialValue(boolean restoreValue, Object defaultValue) {
-
-        if (restoreValue) {
-            if (defaultValue == null) {
-                calendar.setTimeInMillis(getPersistedLong(System.currentTimeMillis()));
-            } else {
-                calendar.setTimeInMillis(Long.parseLong(getPersistedString((String) defaultValue)));
-            }
-        } else {
-            if (defaultValue == null) {
-                calendar.setTimeInMillis(System.currentTimeMillis());
-            } else {
-                calendar.setTimeInMillis(Long.parseLong((String) defaultValue));
-            }
-        }
-        setSummary(getSummary());
+    public int getDialogLayoutResource() {
+        return mDialogLayoutResId;
     }
 
     @Override
-    public CharSequence getSummary() {
-        if (calendar == null) {
-            return null;
-        }
-        return DateFormat.getTimeFormat(getContext()).format(new Date(calendar.getTimeInMillis()));
+    protected void onSetInitialValue(boolean restorePersistedValue, Object defaultValue) {
+        setTime(restorePersistedValue ? getPersistedInt(mTime) : (int) defaultValue);
     }
 }
