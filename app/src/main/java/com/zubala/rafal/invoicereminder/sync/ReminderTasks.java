@@ -29,18 +29,17 @@ public class ReminderTasks {
     public static final String ACTION_PAY_INVOICE = "pay-invoice";
     public static final String ACTION_DISMISS_NOTIFICATION = "dismiss-notification";
 
-    public static void executeTask(Context context, String action) {
+    public static void executeTask(Context context, String action, Uri uri) {
         if (ACTION_PAY_INVOICE.equals(action)) {
-            payInvoice(context);
+            payInvoice(context, uri);
         } else if (ACTION_DISMISS_NOTIFICATION.equals(action)) {
             NotificationUtils.clearAllNotifications(context);
         }
     }
 
-    private static void payInvoice(Context context) {
+    private static void payInvoice(Context context, Uri uri) {
         Intent invoiceDetailIntent = new Intent(context, InvoiceActivity.class);
-        //Uri uriForInvoiceClicked = InvoiceContract.InvoiceEntry.buildInvoiceUriWithId(id);
-        //invoiceDetailIntent.setData(uriForInvoiceClicked);
+        invoiceDetailIntent.setData(uri);
         context.startActivity(invoiceDetailIntent);
 
         NotificationUtils.clearAllNotifications(context);

@@ -199,6 +199,6 @@ public class MainActivity
     }
 
     public void testNotification(View view) {
-        NotificationUtils.remindUserAboutInvoice(this);
+        NotificationUtils.remindUserAboutInvoice(this, 3L);
     }
 }

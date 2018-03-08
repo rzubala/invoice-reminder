@@ -12,6 +12,6 @@ public class InvoiceReminderIntentService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         String action = intent.getAction();
-        ReminderTasks.executeTask(this, action);
+        ReminderTasks.executeTask(this, action, intent.getData());
     }
 }
