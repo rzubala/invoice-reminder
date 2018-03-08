@@ -17,24 +17,77 @@ package com.zubala.rafal.invoicereminder.sync;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.net.Uri;
+import android.os.AsyncTask;
+import android.support.v7.preference.PreferenceManager;
+import android.util.Log;
 
 import com.zubala.rafal.invoicereminder.InvoiceActivity;
 import com.zubala.rafal.invoicereminder.MainActivity;
+import com.zubala.rafal.invoicereminder.R;
 import com.zubala.rafal.invoicereminder.data.InvoiceContract;
+import com.zubala.rafal.invoicereminder.utils.AlarmUtils;
 import com.zubala.rafal.invoicereminder.utils.NotificationUtils;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class ReminderTasks {
 
     public static final String ACTION_PAY_INVOICE = "pay-invoice";
     public static final String ACTION_DISMISS_NOTIFICATION = "dismiss-notification";
+    public static final String ACTION_CHECK_INVOICE_FOR_NOTIFICATION = "check-invoice-notification";
+    private static final String TAG = ReminderTasks.class.getSimpleName();
 
     public static void executeTask(Context context, String action, Uri uri) {
         if (ACTION_PAY_INVOICE.equals(action)) {
             payInvoice(context, uri);
         } else if (ACTION_DISMISS_NOTIFICATION.equals(action)) {
-            NotificationUtils.clearAllNotifications(context);
+            clearNotification(context, uri);
+        } else if (ACTION_CHECK_INVOICE_FOR_NOTIFICATION.equals(action)) {
+            Log.d(TAG, "Check for invoices for notification");
+            checkInvoicesForNotification(context, uri);
         }
+    }
+
+    private static void checkInvoicesForNotification(final Context context, Uri uri) {
+        AsyncTask mBackgroundTask = new AsyncTask() {
+            @Override
+            protected Object doInBackground(Object[] params) {
+                findInvoices(context, InvoiceContract.InvoiceEntry.CONTENT_URI);
+                return null;
+            }
+        };
+        mBackgroundTask.execute();
+    }
+
+    private static void findInvoices(Context context, Uri uri) {
+        Cursor cursor = context.getContentResolver().query(uri, //TODO only with date
+                null,
+                getSelectionArgs(),
+                getSelectionArguments(),
+                InvoiceContract.InvoiceEntry.COLUMN_DATE);
+        if (cursor == null) {
+            return;
+        }
+        int size = cursor.getCount();
+        for (int i=0;i<size;i++) {
+            cursor.moveToPosition(i);
+            Integer id = cursor.getInt(cursor.getColumnIndex(InvoiceContract.InvoiceEntry._ID));
+            if (id != null) {
+                NotificationUtils.remindUserAboutInvoice(context, id);
+            }
+        }
+    }
+
+    private static String getSelectionArgs() {
+        return null;
+    }
+
+    private static String[] getSelectionArguments() {
+        return null;
     }
 
     private static void payInvoice(Context context, Uri uri) {
@@ -42,6 +95,15 @@ public class ReminderTasks {
         invoiceDetailIntent.setData(uri);
         context.startActivity(invoiceDetailIntent);
 
-        NotificationUtils.clearAllNotifications(context);
+        clearNotification(context, uri);
+    }
+
+    private static void clearNotification(Context context, Uri uri) {
+        String idString = uri.getLastPathSegment();
+        try {
+            Integer id = Integer.valueOf(idString);
+            NotificationUtils.clearNotification(context, id);
+        } catch (Exception ex) {
+        }
     }
 }

@@ -16,17 +16,15 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.Toast;
 
-import com.zubala.rafal.invoicereminder.data.DateUtils;
+import com.zubala.rafal.invoicereminder.utils.DateUtils;
 import com.zubala.rafal.invoicereminder.data.InvoiceContract;
 import com.zubala.rafal.invoicereminder.databinding.ActivityInvoiceBinding;
+import com.zubala.rafal.invoicereminder.utils.NumberUtils;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 public class InvoiceActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -194,7 +192,7 @@ public class InvoiceActivity extends AppCompatActivity implements LoaderManager.
         mBinding.descriptionField.setText(description);
 
         Double amount = data.getDouble(data.getColumnIndex(InvoiceContract.InvoiceEntry.COLUMN_AMOUNT));
-        mBinding.numberField.setText(amount.toString());
+        mBinding.numberField.setText(NumberUtils.formatNumberCurrency(amount));
 
         String currency = data.getString(data.getColumnIndex(InvoiceContract.InvoiceEntry.COLUMN_CURRENCY));
         mBinding.currencyField.setText(currency);

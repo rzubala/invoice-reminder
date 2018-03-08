@@ -2,7 +2,6 @@ package com.zubala.rafal.invoicereminder;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,8 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.zubala.rafal.invoicereminder.data.DateUtils;
+import com.zubala.rafal.invoicereminder.utils.DateUtils;
 import com.zubala.rafal.invoicereminder.data.InvoiceContract;
+import com.zubala.rafal.invoicereminder.utils.NumberUtils;
 
 import java.util.Date;
 
@@ -90,7 +90,7 @@ public class InvoiceCursorAdapter extends RecyclerView.Adapter<InvoiceCursorAdap
         holder.itemView.setTag(id);
         holder.invoiceDescriptionView.setText(description);
         holder.invoiceDateView.setText(DateUtils.formatDate(mContext, date));
-        holder.invoiceAmountView.setText(amount.toString());
+        holder.invoiceAmountView.setText(NumberUtils.formatNumberCurrency(amount));
         holder.invoiceCurrencyView.setText(" "+currency);
 
         int type = getItemViewType(position);

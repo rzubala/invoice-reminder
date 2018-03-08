@@ -1,4 +1,4 @@
-package com.zubala.rafal.invoicereminder.data;
+package com.zubala.rafal.invoicereminder.utils;
 
 import android.content.Context;
 
@@ -27,3 +27,5 @@ public class DateUtils {
         return sdf.format(date);
     }
 }
+
+//TODO number formatter

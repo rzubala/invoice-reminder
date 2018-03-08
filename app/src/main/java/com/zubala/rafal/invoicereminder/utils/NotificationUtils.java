@@ -22,7 +22,7 @@ import com.zubala.rafal.invoicereminder.sync.ReminderTasks;
 
 public class NotificationUtils {
 
-    private static final int INVOICE_REMINDER_NOTIFICATION_ID = 1234;
+    private static final int INVOICE_REMINDER_NOTIFICATION_ID = 1000;
     private static final int INVOICE_REMINDER_PENDING_INTENT_ID = 1235;
     private static final String INVOICE_REMINDER_NOTIFICATION_CHANNEL_ID = "invoice_reminder_notification_channel";
     private static final int ACTION_PAY_PENDING_INTENT_ID = 20;
@@ -33,7 +33,12 @@ public class NotificationUtils {
         notificationManager.cancelAll();
     }
 
-    public static void remindUserAboutInvoice(Context context, Long id) {
+    public static void clearNotification(Context context, int id) {
+        NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.cancel(id);
+    }
+
+    public static void remindUserAboutInvoice(Context context, int id) {
         NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel mChannel = new NotificationChannel(INVOICE_REMINDER_NOTIFICATION_CHANNEL_ID, context.getString(R.string.main_notification_channel_name), NotificationManager.IMPORTANCE_HIGH);
@@ -43,23 +48,24 @@ public class NotificationUtils {
                 .setColor(ContextCompat.getColor(context, R.color.colorPrimary))
                 .setSmallIcon(R.drawable.ic_sale_time)
                 .setLargeIcon(largeIcon(context))
-                .setContentTitle(context.getString(R.string.reminder_notification_title))
-                .setContentText(context.getString(R.string.reminder_notification_body))
+                .setContentTitle(context.getString(R.string.reminder_notification_title)) //TODO add amount
+                .setContentText(context.getString(R.string.reminder_notification_body)) //TODO add description
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(context.getString(R.string.reminder_notification_body)))
                 .setContentIntent(contentIntent(context))
                 .addAction(markInvoiceAction(context, id))
-                .addAction(ignoreReminderAction(context))
-                .setAutoCancel(true);
+                .addAction(ignoreReminderAction(context, id));
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN && Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
             notificationBuilder.setPriority(NotificationCompat.PRIORITY_HIGH);
         }
-        notificationManager.notify(INVOICE_REMINDER_NOTIFICATION_ID, notificationBuilder.build());
+        notificationManager.notify(INVOICE_REMINDER_NOTIFICATION_ID + id, notificationBuilder.build());
     }
 
-    private static Action ignoreReminderAction(Context context) {
+    private static Action ignoreReminderAction(Context context, int id) {
         Intent ignoreReminderIntent = new Intent(context, InvoiceReminderIntentService.class);
         ignoreReminderIntent.setAction(ReminderTasks.ACTION_DISMISS_NOTIFICATION);
+        Uri uriForInvoiceClicked = InvoiceContract.InvoiceEntry.buildInvoiceUriWithId(id);
+        ignoreReminderIntent.setData(uriForInvoiceClicked);
         PendingIntent ignoreReminderPendingIntent = PendingIntent.getService(
                 context,
                 ACTION_IGNORE_PENDING_INTENT_ID,
@@ -69,15 +75,15 @@ public class NotificationUtils {
         return ignoreReminderAction;
     }
 
-    private static Action markInvoiceAction(Context context, Long id) {
-        Intent incrementWaterCountIntent = new Intent(context, InvoiceReminderIntentService.class);
-        incrementWaterCountIntent.setAction(ReminderTasks.ACTION_PAY_INVOICE);
+    private static Action markInvoiceAction(Context context, int id) {
+        Intent markInvoiceIntent = new Intent(context, InvoiceReminderIntentService.class);
+        markInvoiceIntent.setAction(ReminderTasks.ACTION_PAY_INVOICE);
         Uri uriForInvoiceClicked = InvoiceContract.InvoiceEntry.buildInvoiceUriWithId(id);
-        incrementWaterCountIntent.setData(uriForInvoiceClicked);
+        markInvoiceIntent.setData(uriForInvoiceClicked);
         PendingIntent incrementWaterPendingIntent = PendingIntent.getService(
                 context,
                 ACTION_PAY_PENDING_INTENT_ID,
-                incrementWaterCountIntent,
+                markInvoiceIntent,
                 PendingIntent.FLAG_CANCEL_CURRENT);
         Action drinkWaterAction = new Action(R.drawable.ic_check_black_24dp, context.getString(R.string.action_pay), incrementWaterPendingIntent);
         return drinkWaterAction;
