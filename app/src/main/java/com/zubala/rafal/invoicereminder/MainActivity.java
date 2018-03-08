@@ -21,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.zubala.rafal.invoicereminder.data.InvoiceContract;
+import com.zubala.rafal.invoicereminder.utils.AlarmUtils;
 import com.zubala.rafal.invoicereminder.utils.NotificationUtils;
 
 import java.util.LinkedList;
@@ -199,6 +200,7 @@ public class MainActivity
     }
 
     public void testNotification(View view) {
-        NotificationUtils.remindUserAboutInvoice(this, 3L);
+        //NotificationUtils.remindUserAboutInvoice(this, 3L);
+        AlarmUtils.startAlarm(this);
     }
 }
