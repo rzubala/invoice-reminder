@@ -20,26 +20,30 @@
     </style>
 
     <style name="InvoiceLabelStyle">
-        <item name="android:textSize">19sp</item>
-        <item name="android:textColor">@android:color/primary_text_light</item>
-    </style>
-
-    <style name="InvoiceListStyle">
         <item name="android:textSize">17sp</item>
         <item name="android:textColor">@android:color/primary_text_light</item>
     </style>
 
+    <style name="InvoiceLabelAmountStyle" parent="InvoiceLabelStyle">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="InvoiceListStyle">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@android:color/primary_text_light</item>
+    </style>
+
     <style name="InvoiceAmountListStyle" parent="InvoiceListStyle">
-        <item name="android:textSize">21sp</item>
+        <item name="android:textSize">19sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
     <style name="InvoiceCurrencyListStyle" parent="InvoiceListStyle">
-        <item name="android:textSize">21sp</item>
+        <item name="android:textSize">19sp</item>
     </style>
 
     <style name="InvoiceDateListStyle" parent="InvoiceListStyle">
-        <item name="android:textSize">19sp</item>
+        <item name="android:textSize">17sp</item>
     </style>
 
     <style name="InvoiceDescriptionListStyle" parent="InvoiceListStyle">
@@ -48,23 +52,23 @@
     </style>
 
     <style name="TodayInvoiceListStyle">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:textColor">@android:color/primary_text_light</item>
     </style>
 
     <style name="TodayInvoiceAmountListStyle" parent="InvoiceListStyle">
-        <item name="android:textSize">24sp</item>
+        <item name="android:textSize">21sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/colorRed</item>
     </style>
 
     <style name="TodayInvoiceCurrencyListStyle" parent="InvoiceListStyle">
-        <item name="android:textSize">24sp</item>
+        <item name="android:textSize">21sp</item>
         <item name="android:textColor">@color/colorRed</item>
     </style>
 
     <style name="TodayInvoiceDateListStyle" parent="InvoiceListStyle">
-        <item name="android:textSize">19sp</item>
+        <item name="android:textSize">17sp</item>
         <item name="android:textColor">@color/colorRed</item>
     </style>
 
