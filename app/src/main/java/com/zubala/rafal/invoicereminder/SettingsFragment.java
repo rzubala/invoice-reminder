@@ -31,6 +31,9 @@ public class SettingsFragment extends PreferenceFragmentCompat implements OnShar
                 TimePreference tpreference = (TimePreference) preference;
                 int timestamp = tpreference.getTime();
                 setTimePreference(tpreference, timestamp);
+            } else if (preference.getKey().equals(getContext().getString(R.string.pref_days_before_notification_key))) {
+                String value = sharedPreferences.getString(preference.getKey(), "");
+                setDaysPreference(preference, value);
             }
         }
 
@@ -47,8 +50,11 @@ public class SettingsFragment extends PreferenceFragmentCompat implements OnShar
                 setTimePreference(tpreference, timestamp);
                 preference.setOnPreferenceChangeListener(this);
                 AlarmUtils.startAlarm(getPreferenceScreen().getContext());
-            } else if (key.equals(getPreferenceScreen().getContext().getString(R.string.pref_show_notification_key))) {
+            } else if (key.equals(getContext().getString(R.string.pref_show_notification_key))) {
                 AlarmUtils.startAlarm(getPreferenceScreen().getContext());
+            } else if (key.equals(getContext().getString(R.string.pref_days_before_notification_key))) {
+                String value = sharedPreferences.getString(preference.getKey(), "");
+                setDaysPreference(preference, value);
             }
         }
     }
@@ -93,5 +99,9 @@ public class SettingsFragment extends PreferenceFragmentCompat implements OnShar
         int minutes = value % 60;
         String valueStr = String.format("%02d", hours)+":"+String.format("%02d", minutes);
         preference.setSummary(valueStr);
+    }
+
+    private void setDaysPreference(Preference preference, String value) {
+        preference.setSummary(value);
     }
 }
