@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="activity_vertical_margin">10dp</dimen>
+
+    <dimen name="activity_vertical_margin_double">16dp</dimen>
+    <dimen name="activity_vertical_margin_half">5dp</dimen>
+    <dimen name="activity_vertical_margin_q">3dp</dimen>
+
+    <dimen name="activity_vertical_icon">30dp</dimen>
+</resources>

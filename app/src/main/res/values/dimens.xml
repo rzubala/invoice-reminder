@@ -1,7 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="activity_horizontal_margin">12dp</dimen>
-    <dimen name="activity_vertical_margin">12dp</dimen>
+    <dimen name="activity_vertical_margin">10dp</dimen>
 
     <dimen name="activity_vertical_margin_double">26dp</dimen>
     <dimen name="activity_vertical_margin_half">5dp</dimen>
@@ -11,6 +11,6 @@
     <dimen name="activity_vertical_amount_right_margin">136dp</dimen>
 
     <dimen name="activity_vertical_margin_after_icon">60dp</dimen>
-    <dimen name="activity_vertical_icon">36dp</dimen>
+    <dimen name="activity_vertical_icon">30dp</dimen>
     <dimen name="activity_vertical_margin_icon">8dp</dimen>
 </resources>
