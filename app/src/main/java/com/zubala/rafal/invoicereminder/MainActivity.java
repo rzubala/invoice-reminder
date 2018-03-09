@@ -43,7 +43,7 @@ public class MainActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main); //TODO land layout
+        setContentView(R.layout.activity_main);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerViewInvoices);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));

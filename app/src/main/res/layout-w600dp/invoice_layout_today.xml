@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    tools:context="com.zubala.rafal.invoicereminder.MainActivity">
+
+    <ImageView
+        android:id="@+id/imageViewCheck"
+        android:layout_width="@dimen/activity_vertical_icon"
+        android:layout_height="@dimen/activity_vertical_icon"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/clock_alert" />
+
+    <TextView
+        android:id="@+id/invoiceDescription"
+        style="@style/TodayInvoiceDescriptionListStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_vertical_margin"
+        android:layout_marginStart="@dimen/activity_vertical_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:gravity="left"
+        android:textAlignment="gravity"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/invoiceDate"
+        app:layout_constraintStart_toEndOf="@+id/invoiceCurrency"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Faktura za gaz oraz kilka opłat za internet i wodę" />
+
+    <TextView
+        android:id="@+id/invoiceAmount"
+        style="@style/TodayInvoiceAmountListStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_vertical_margin_after_icon"
+        android:layout_marginLeft="@dimen/activity_vertical_margin_after_icon"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="1123.12" />
+
+    <TextView
+        android:id="@+id/invoiceCurrency"
+        style="@style/TodayInvoiceCurrencyListStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/invoiceAmount"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="PLN" />
+
+    <TextView
+        android:id="@+id/invoiceDate"
+        style="@style/TodayInvoiceDateListStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_vertical_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="2018.03.01" />
+</android.support.constraint.ConstraintLayout>
