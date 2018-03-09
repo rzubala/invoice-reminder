@@ -16,7 +16,6 @@
     <string name="pref_show_false">Hidden</string>
     <string name="add">Add</string>
     <string name="update">Update</string>
-
     <string name="newInvoiceError">Please provide correct data</string>
     <string name="invoiceAmountError">Amount not valid</string>
     <string name="dateFormat">MM/dd/yyyy</string>
@@ -29,10 +28,11 @@
     <string name="pref_show_notification_label">Show notifications</string>
     <string name="pref_notification_time_label">Notification time</string>
     <string name="not_paid_label">Not paid</string>
-
     <string name="reminder_notification_title">Pay on time</string>
     <string name="reminder_notification_body">An invoice to be paid:</string>
     <string name="main_notification_channel_name" translatable="false">Primary</string>
     <string name="action_pay">Mark as paid</string>
     <string name="action_cancel">Cancel</string>
+    <string name="pref_days_before_notification_label">Days before notification</string>
+    <string name="pref_days_before_notification_key" translatable="false">days_before_notification</string>
 </resources>

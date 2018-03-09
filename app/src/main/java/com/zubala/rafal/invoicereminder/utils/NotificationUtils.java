@@ -1,5 +1,6 @@
 package com.zubala.rafal.invoicereminder.utils;
 
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -66,12 +67,14 @@ public class NotificationUtils {
                 .setColor(ContextCompat.getColor(context, R.color.colorPrimary))
                 .setSmallIcon(R.drawable.ic_sale_time)
                 .setLargeIcon(largeIcon(context))
-                .setContentTitle(title) //TODO add amount
-                .setContentText(content) //TODO add description
+                .setContentTitle(title)
+                .setContentText(content)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(context.getString(R.string.reminder_notification_body)))
                 .setContentIntent(contentIntent(context))
                 .addAction(markInvoiceAction(context, id))
-                .addAction(ignoreReminderAction(context, id));
+                .addAction(ignoreReminderAction(context, id))
+                .setDefaults(Notification.DEFAULT_SOUND)
+                .setAutoCancel(true);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN && Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
             notificationBuilder.setPriority(NotificationCompat.PRIORITY_HIGH);

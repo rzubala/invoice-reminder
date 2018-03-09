@@ -16,6 +16,7 @@ import com.zubala.rafal.invoicereminder.sync.InvoiceReminderIntentService;
 import com.zubala.rafal.invoicereminder.sync.ReminderTasks;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.TimerTask;
 
 /**
@@ -42,13 +43,12 @@ public class AlarmUtils {
                 alarmIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
 
+        manager.cancel(pendingIntent);
         if (!showNotification) {
-            manager.cancel(pendingIntent);
             Log.d(TAG, "Alarm canceled");
             return;
         }
 
-        int interval = 1000 * 60 * 60 * 24;
         int value = sharedPreferences.getInt(context.getString(R.string.pref_notification_time_key), 12*60);
         int hour = value / 60;
         int minute = value % 60;
@@ -57,9 +57,13 @@ public class AlarmUtils {
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.set(Calendar.HOUR_OF_DAY, hour);
         calendar.set(Calendar.MINUTE, minute);
+        Date now = new Date();
+        if (now.after(calendar.getTime())) {
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
+        }
 
-        manager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), interval, pendingIntent);
+        manager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
 
-        Log.d(TAG, "Alarm scheduled: "+ String.format("%02d", hour)+":"+String.format("%02d", minute));
+        Log.d(TAG, "Alarm scheduled: "+ String.format("%02d", hour)+":"+String.format("%02d", minute) + " ("+ DateUtils.formatDate(context, calendar.getTime()) +")");
     }
 }

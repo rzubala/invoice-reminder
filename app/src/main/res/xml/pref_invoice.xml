@@ -21,9 +21,17 @@
         android:summaryOn="@string/pref_show_true"
         android:title="@string/pref_show_notification_label" />
 
+    <EditTextPreference
+        android:dependency="@string/pref_show_notification_key"
+        android:defaultValue="@integer/days_prior_notification"
+        android:key="@string/pref_days_before_notification_key"
+        android:title="@string/pref_days_before_notification_label" />
+
     <com.zubala.rafal.invoicereminder.TimePreference
+        android:dependency="@string/pref_show_notification_key"
         android:key="@string/pref_notification_time_key"
         android:title="@string/pref_notification_time_label"
         android:defaultValue="720" />
+
 
 </PreferenceScreen>
