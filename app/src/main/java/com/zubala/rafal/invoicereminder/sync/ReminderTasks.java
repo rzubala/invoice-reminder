@@ -31,6 +31,7 @@ import com.zubala.rafal.invoicereminder.data.InvoiceContract;
 import com.zubala.rafal.invoicereminder.utils.AlarmUtils;
 import com.zubala.rafal.invoicereminder.utils.NotificationUtils;
 
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -48,7 +49,7 @@ public class ReminderTasks {
         } else if (ACTION_DISMISS_NOTIFICATION.equals(action)) {
             clearNotification(context, uri);
         } else if (ACTION_CHECK_INVOICE_FOR_NOTIFICATION.equals(action)) {
-            Log.d(TAG, "Check for invoices for notification");
+            Log.d(AlarmUtils.TAG, "Check for invoices for notification");
             checkInvoicesForNotification(context, uri);
         } else if (ACTION_OPEN_PAY_ON_TIME.equals(action)) {
             Intent mainIntent = new Intent(context, MainActivity.class);
@@ -69,10 +70,22 @@ public class ReminderTasks {
     }
 
     private static void findInvoices(Context context, Uri uri) {
-        Cursor cursor = context.getContentResolver().query(uri, //TODO only with date and days number
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        boolean showNotification = sharedPreferences.getBoolean(context.getString(R.string.pref_show_notification_key), context.getResources().getBoolean(R.bool.pref_show_notification));
+        if (!showNotification) {
+            return;
+        }
+
+        String daysBeforeNotificationStr = sharedPreferences.getString(context.getString(R.string.pref_days_before_notification_key), "1");
+        int daysBeforeNotification = 1;
+        try {
+            daysBeforeNotification = Integer.parseInt(daysBeforeNotificationStr);
+        } catch (Exception ex) {}
+
+        Cursor cursor = context.getContentResolver().query(uri,
                 null,
                 getSelectionArgs(),
-                getSelectionArguments(),
+                getSelectionArguments(daysBeforeNotification),
                 InvoiceContract.InvoiceEntry.COLUMN_DATE);
         if (cursor == null) {
             return;
@@ -85,11 +98,24 @@ public class ReminderTasks {
     }
 
     private static String getSelectionArgs() {
-        return null;
+        String selection = InvoiceContract.InvoiceEntry.COLUMN_PAID + " = ? ";
+        selection += " and ";
+        selection += InvoiceContract.InvoiceEntry.COLUMN_DATE + " = ? ";
+        return selection;
     }
 
-    private static String[] getSelectionArguments() {
-        return null;
+    private static String[] getSelectionArguments(int days) {
+        List<String> list = new LinkedList<String>();
+        list.add(""+0);
+
+        long todayTimestamp = InvoiceContract.InvoiceEntry.getSqlSelectionForToday();
+        todayTimestamp += days * InvoiceContract.InvoiceEntry.DAY_IN_MILLIS;
+        list.add(""+todayTimestamp);
+
+        Log.d(AlarmUtils.TAG, "Invoices timestamp: " + todayTimestamp);
+
+        String[] selectionArguments = list.toArray(new String[list.size()]);
+        return selectionArguments;
     }
 
     private static void payInvoice(Context context, Uri uri) {

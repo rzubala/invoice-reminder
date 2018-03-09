@@ -7,6 +7,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.preference.PreferenceScreen;
+import android.widget.Toast;
 
 import com.zubala.rafal.invoicereminder.utils.AlarmUtils;
 
@@ -31,13 +32,14 @@ public class SettingsFragment extends PreferenceFragmentCompat implements OnShar
                 TimePreference tpreference = (TimePreference) preference;
                 int timestamp = tpreference.getTime();
                 setTimePreference(tpreference, timestamp);
-            } else if (preference.getKey().equals(getContext().getString(R.string.pref_days_before_notification_key))) {
+            } else if (preference.getKey().equals(getString(R.string.pref_days_before_notification_key))) {
                 String value = sharedPreferences.getString(preference.getKey(), "");
                 setDaysPreference(preference, value);
             }
         }
 
-        //TODO add number of days
+        Preference preference = findPreference(getString(R.string.pref_days_before_notification_key));
+        preference.setOnPreferenceChangeListener(this);
     }
 
     @Override
@@ -49,12 +51,13 @@ public class SettingsFragment extends PreferenceFragmentCompat implements OnShar
                 int timestamp = tpreference.getTime();
                 setTimePreference(tpreference, timestamp);
                 preference.setOnPreferenceChangeListener(this);
-                AlarmUtils.startAlarm(getPreferenceScreen().getContext());
-            } else if (key.equals(getContext().getString(R.string.pref_show_notification_key))) {
-                AlarmUtils.startAlarm(getPreferenceScreen().getContext());
-            } else if (key.equals(getContext().getString(R.string.pref_days_before_notification_key))) {
+                AlarmUtils.startAlarm(getContext());
+            } else if (key.equals(getString(R.string.pref_show_notification_key))) {
+                AlarmUtils.startAlarm(getContext());
+            } else if (key.equals(getString(R.string.pref_days_before_notification_key))) {
                 String value = sharedPreferences.getString(preference.getKey(), "");
                 setDaysPreference(preference, value);
+                AlarmUtils.startAlarm(getContext());
             }
         }
     }
@@ -87,7 +90,19 @@ public class SettingsFragment extends PreferenceFragmentCompat implements OnShar
     }
 
     @Override
-    public boolean onPreferenceChange(Preference preference, Object o) {
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        Toast error = Toast.makeText(getContext(), getString(R.string.newInvoiceError), Toast.LENGTH_SHORT);
+
+        if (preference.getKey().equals(getString(R.string.pref_days_before_notification_key))) {
+            String stringDays = (String) newValue;
+            try {
+                int days = Integer.parseInt(stringDays);
+                return true;
+            } catch (NumberFormatException nfe) {
+                error.show();
+                return false;
+            }
+        }
         return true;
     }
 

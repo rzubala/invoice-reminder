@@ -147,7 +147,7 @@ public class InvoiceActivity extends AppCompatActivity implements LoaderManager.
         }
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(InvoiceContract.InvoiceEntry.COLUMN_DATE, date.getTime());
+        contentValues.put(InvoiceContract.InvoiceEntry.COLUMN_DATE, InvoiceContract.InvoiceEntry.normalizeDate(date.getTime(), true));
         contentValues.put(InvoiceContract.InvoiceEntry.COLUMN_DESCRIPTION, description);
         contentValues.put(InvoiceContract.InvoiceEntry.COLUMN_CURRENCY, currency);
         contentValues.put(InvoiceContract.InvoiceEntry.COLUMN_AMOUNT, amount);

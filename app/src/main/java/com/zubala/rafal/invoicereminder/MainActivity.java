@@ -156,8 +156,6 @@ public class MainActivity
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         mAdapter.swapCursor(data);
-
-        AlarmUtils.startAlarm(this);
     }
 
     @Override
@@ -193,7 +191,7 @@ public class MainActivity
             list.add(""+0);
         }
         if (!showHistory) {
-            list.add(""+InvoiceContract.InvoiceEntry.getSqlSelectionForTodayOnwards());
+            list.add(""+InvoiceContract.InvoiceEntry.getSqlSelectionForToday());
             list.add(""+0);
         }
         String[] selectionArguments = list.toArray(new String[list.size()]);

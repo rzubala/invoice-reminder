@@ -27,7 +27,7 @@ public class AlarmUtils {
 
     private static final int INVOICE_REMINDER_PENDING_INTENT_ID = 1435;
 
-    private static final String TAG = AlarmUtils.class.getSimpleName();
+    public static final String TAG = AlarmUtils.class.getSimpleName();
 
     public static void startAlarm(Context context) {
         AlarmManager manager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);

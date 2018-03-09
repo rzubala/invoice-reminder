@@ -3,12 +3,15 @@ package com.zubala.rafal.invoicereminder;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.zubala.rafal.invoicereminder.sync.ReminderTasks;
+import com.zubala.rafal.invoicereminder.utils.AlarmUtils;
 import com.zubala.rafal.invoicereminder.utils.DateUtils;
 import com.zubala.rafal.invoicereminder.data.InvoiceContract;
 import com.zubala.rafal.invoicereminder.utils.NumberUtils;
@@ -26,6 +29,7 @@ public class InvoiceCursorAdapter extends RecyclerView.Adapter<InvoiceCursorAdap
     final private InvoiceOnClickHandler mClickHandler;
     private static final int VIEW_TYPE_TODAY = 0;
     private static final int VIEW_TYPE_NORMAL_DAY = 1;
+    private static final String TAG = InvoiceCursorAdapter.class.getSimpleName();
 
     public InvoiceCursorAdapter(Context context, InvoiceOnClickHandler handler) {
         this.mContext = context;
@@ -34,7 +38,7 @@ public class InvoiceCursorAdapter extends RecyclerView.Adapter<InvoiceCursorAdap
 
     @Override
     public InvoiceCursorAdapter.InvoiceViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        int layoutId; //TODO add fragments
+        int layoutId;
         switch (viewType) {
             case VIEW_TYPE_TODAY: {
                 layoutId = R.layout.invoice_layout_today;
@@ -59,7 +63,7 @@ public class InvoiceCursorAdapter extends RecyclerView.Adapter<InvoiceCursorAdap
         mCursor.moveToPosition(position);
         boolean paid = mCursor.getInt(paidIndex) > 0;
         Long timestamp = mCursor.getLong(dateIndex);
-        Long todayTimestamp = InvoiceContract.InvoiceEntry.getSqlSelectionForTodayOnwards();
+        Long todayTimestamp = InvoiceContract.InvoiceEntry.getSqlSelectionForToday();
         if (!paid && timestamp <= todayTimestamp) {
             return VIEW_TYPE_TODAY;
         }

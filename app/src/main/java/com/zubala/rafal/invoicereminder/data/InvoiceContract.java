@@ -2,6 +2,9 @@ package com.zubala.rafal.invoicereminder.data;
 
 import android.net.Uri;
 import android.provider.BaseColumns;
+import android.util.Log;
+
+import com.zubala.rafal.invoicereminder.utils.AlarmUtils;
 
 import java.util.concurrent.TimeUnit;
 
@@ -39,13 +42,16 @@ public class InvoiceContract {
                     .build();
         }
 
-        public static long getSqlSelectionForTodayOnwards() {
-            long normalizedUtcNow = normalizeDate(System.currentTimeMillis());
+        public static long getSqlSelectionForToday() {
+            long normalizedUtcNow = normalizeDate(System.currentTimeMillis(), false);
             return normalizedUtcNow;
         }
 
-        public static long normalizeDate(long date) {
+        public static long normalizeDate(long date, boolean increment) {
             long daysSinceEpoch = elapsedDaysSinceEpoch(date);
+            if (increment) {
+                daysSinceEpoch++;
+            }
             long millisFromEpochToTodayAtMidnightUtc = daysSinceEpoch * DAY_IN_MILLIS;
             return millisFromEpochToTodayAtMidnightUtc;
         }

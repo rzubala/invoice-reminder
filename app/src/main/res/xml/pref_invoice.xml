@@ -25,7 +25,8 @@
         android:dependency="@string/pref_show_notification_key"
         android:defaultValue="@integer/days_prior_notification"
         android:key="@string/pref_days_before_notification_key"
-        android:title="@string/pref_days_before_notification_label" />
+        android:title="@string/pref_days_before_notification_label"
+        android:inputType="number" />
 
     <com.zubala.rafal.invoicereminder.TimePreference
         android:dependency="@string/pref_show_notification_key"
