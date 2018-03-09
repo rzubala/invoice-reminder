@@ -34,7 +34,7 @@ public class InvoiceCursorAdapter extends RecyclerView.Adapter<InvoiceCursorAdap
 
     @Override
     public InvoiceCursorAdapter.InvoiceViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        int layoutId;
+        int layoutId; //TODO add fragments
         switch (viewType) {
             case VIEW_TYPE_TODAY: {
                 layoutId = R.layout.invoice_layout_today;

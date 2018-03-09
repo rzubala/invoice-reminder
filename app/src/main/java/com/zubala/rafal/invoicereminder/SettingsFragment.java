@@ -33,6 +33,8 @@ public class SettingsFragment extends PreferenceFragmentCompat implements OnShar
                 setTimePreference(tpreference, timestamp);
             }
         }
+
+        //TODO add number of days
     }
 
     @Override

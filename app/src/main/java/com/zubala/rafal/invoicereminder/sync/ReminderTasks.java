@@ -69,7 +69,7 @@ public class ReminderTasks {
     }
 
     private static void findInvoices(Context context, Uri uri) {
-        Cursor cursor = context.getContentResolver().query(uri, //TODO only with date
+        Cursor cursor = context.getContentResolver().query(uri, //TODO only with date and days number
                 null,
                 getSelectionArgs(),
                 getSelectionArguments(),
