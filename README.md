@@ -6,4 +6,5 @@ Android application to remind the user about unpaid invoices.
 
 
 ---
-Icon made by Freepik from www.flaticon.com
+App icon made by Freepik from www.flaticon.com
+Icons downloaded from https://materialdesignicons.com/
