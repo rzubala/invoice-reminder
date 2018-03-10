@@ -13,4 +13,6 @@
     <dimen name="activity_vertical_margin_after_icon">60dp</dimen>
     <dimen name="activity_vertical_icon">30dp</dimen>
     <dimen name="activity_vertical_margin_icon">8dp</dimen>
+
+    <dimen name="activity_vertical_delete_icon">50dp</dimen>
 </resources>

@@ -14,7 +14,7 @@
     <string name="pref_show_false">Ukryte</string>
     <string name="add">Dodaj</string>
     <string name="update">Uaktualnij</string>
-
+    <string name="delete">Usuń</string>
     <string name="newInvoiceError">Proszę podać poprawne dane</string>
     <string name="invoiceAmountError">Niepoprawna kwota</string>
     <string name="dateFormat">dd/MM/yyyy</string>

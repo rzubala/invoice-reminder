@@ -96,21 +96,43 @@
 
         <Button
             android:id="@+id/button"
-            style="@style/TextAppearance.AppCompat.Large"
-            android:layout_width="match_parent"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/activity_vertical_margin"
+            android:layout_marginEnd="@dimen/activity_vertical_margin_double"
+            android:layout_marginRight="@dimen/activity_vertical_margin"
             android:layout_marginStart="@dimen/activity_vertical_margin"
+            android:layout_marginLeft="@dimen/activity_vertical_margin"
             android:layout_marginTop="@dimen/activity_vertical_margin_double"
             android:background="@color/colorPrimary"
+            android:drawableLeft="@drawable/ic_content_save_white_24dp"
             android:onClick="onClickAddInvoice"
+            android:paddingLeft="@dimen/activity_vertical_margin"
             android:text="@string/add"
             android:textColor="@android:color/primary_text_dark"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/delete"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/checkBox" />
 
+        <ImageButton
+            android:id="@+id/delete"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="@dimen/activity_vertical_delete_icon"
+            android:layout_height="0dp"
+            android:layout_marginEnd="@dimen/activity_vertical_margin"
+            android:layout_marginRight="@dimen/activity_vertical_margin"
+            android:layout_marginStart="@dimen/activity_vertical_margin_double"
+            android:layout_marginLeft="@dimen/activity_vertical_margin_double"
+            android:background="@color/colorPrimary"
+            android:onClick="onClickDeleteInvoice"
+            android:src="@drawable/ic_delete_white_24dp"
+            android:textColor="@android:color/primary_text_dark"
+            app:layout_constraintBottom_toBottomOf="@+id/button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/button"
+            app:layout_constraintTop_toTopOf="@+id/button" />
 
 
     </android.support.constraint.ConstraintLayout>

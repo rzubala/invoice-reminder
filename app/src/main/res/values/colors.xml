@@ -8,4 +8,5 @@
     <color name="colorUnpaid">#f7c7c7</color>
     <color name="colorGray">#636363</color>
     <color name="colorRed">#fa0404</color>
+    <color name="colorLightGray">#b4b4b4</color>
 </resources>

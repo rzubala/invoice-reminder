@@ -69,9 +69,14 @@ public class InvoiceActivity extends AppCompatActivity implements LoaderManager.
 
         mUri = getIntent().getData();
         if (mUri == null) {
+            mBinding.delete.setEnabled(false);
+            mBinding.delete.setColorFilter(R.color.colorGray);
+            mBinding.delete.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
             Log.d(TAG, "mURI null");
         } else {
             Log.d(TAG, "mURI: " + mUri.toString());
+            mBinding.delete.setColorFilter(getResources().getColor(R.color.colorRed));
+            mBinding.delete.setEnabled(true);
             mBinding.button.setText(R.string.update);
             getSupportLoaderManager().initLoader(ID_INVOICE_LOADER, null, this);
         }
@@ -118,6 +123,19 @@ public class InvoiceActivity extends AppCompatActivity implements LoaderManager.
         } else {
             mBinding.checkBox.setText(R.string.not_paid_label);
         }
+    }
+
+    public void onClickDeleteInvoice(View view) {
+        if (id == null) {
+            finish();
+        }
+
+        String stringId = Integer.toString(id);
+        Uri uri = InvoiceContract.InvoiceEntry.CONTENT_URI;
+        uri = uri.buildUpon().appendPath(stringId).build();
+        getContentResolver().delete(uri, null, null);
+
+        finish();
     }
 
     public void onClickAddInvoice(View view) {
