@@ -23,7 +23,6 @@
         android:layout_marginStart="@dimen/activity_vertical_margin"
         android:layout_marginLeft="@dimen/activity_vertical_margin"
         android:layout_marginTop="@dimen/activity_vertical_margin_double"
-        android:ems="10"
         android:inputType="date"
         android:clickable="true"
         android:focusable="false"
@@ -56,7 +55,6 @@
         android:layout_marginStart="@dimen/activity_vertical_margin"
         android:layout_marginLeft="@dimen/activity_vertical_margin"
         android:layout_marginTop="@dimen/activity_vertical_margin_double"
-        android:ems="10"
         android:inputType="numberDecimal"
         android:hint="@string/amount_label"
         app:layout_constraintEnd_toEndOf="parent"
@@ -72,10 +70,8 @@
         android:layout_marginEnd="@dimen/activity_vertical_margin"
         android:layout_marginRight="@dimen/activity_vertical_margin"
         android:layout_marginTop="@dimen/activity_vertical_margin_double"
-        android:ems="10"
         android:text="@string/default_currency"
         android:hint="@string/currency_label"
-        android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/descriptionField" />
 
