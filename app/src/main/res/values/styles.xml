@@ -1,5 +1,4 @@
 <resources>
-
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
@@ -79,6 +78,12 @@
     <style name="TodayInvoiceDescriptionListStyle" parent="InvoiceListStyle">
         <item name="android:textColor">@color/colorGray</item>
         <item name="android:textStyle">italic</item>
+    </style>
+
+    <style name="StyleEmptyItems">
+        <item name="android:textColor">@color/colorGray</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:textSize">19sp</item>
     </style>
 
 </resources>

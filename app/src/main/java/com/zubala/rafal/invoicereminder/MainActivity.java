@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ViewSwitcher;
 
 import com.zubala.rafal.invoicereminder.data.InvoiceContract;
 import com.zubala.rafal.invoicereminder.utils.AlarmUtils;
@@ -34,6 +35,8 @@ public class MainActivity
 
     private RecyclerView mRecyclerView;
 
+    private ViewSwitcher mViewSwitcher;
+
     private InvoiceCursorAdapter mAdapter;
 
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -46,8 +49,9 @@ public class MainActivity
         setContentView(R.layout.activity_main);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerViewInvoices);
+        mViewSwitcher = (ViewSwitcher) findViewById(R.id.switcher);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new InvoiceCursorAdapter(this, this);
+        mAdapter = new InvoiceCursorAdapter(this, this, mViewSwitcher);
         mRecyclerView.setAdapter(mAdapter);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

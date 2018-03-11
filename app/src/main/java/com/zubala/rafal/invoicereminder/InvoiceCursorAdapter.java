@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ViewSwitcher;
 
 import com.zubala.rafal.invoicereminder.sync.ReminderTasks;
 import com.zubala.rafal.invoicereminder.utils.AlarmUtils;
@@ -26,14 +27,16 @@ public class InvoiceCursorAdapter extends RecyclerView.Adapter<InvoiceCursorAdap
 
     private Cursor mCursor;
     private Context mContext;
+    private ViewSwitcher mSwitcher;
     final private InvoiceOnClickHandler mClickHandler;
     private static final int VIEW_TYPE_TODAY = 0;
     private static final int VIEW_TYPE_NORMAL_DAY = 1;
     private static final String TAG = InvoiceCursorAdapter.class.getSimpleName();
 
-    public InvoiceCursorAdapter(Context context, InvoiceOnClickHandler handler) {
+    public InvoiceCursorAdapter(Context context, InvoiceOnClickHandler handler, ViewSwitcher mViewSwitcher) {
         this.mContext = context;
         this.mClickHandler = handler;
+        this.mSwitcher = mViewSwitcher;
     }
 
     @Override
@@ -124,8 +127,17 @@ public class InvoiceCursorAdapter extends RecyclerView.Adapter<InvoiceCursorAdap
         return mCursor.getCount();
     }
 
+    private void showItems(boolean show) {
+        if (show && R.id.recyclerViewInvoices == mSwitcher.getNextView().getId()) {
+            mSwitcher.showNext();
+        } else if (!show && R.id.text_empty == mSwitcher.getNextView().getId()) {
+            mSwitcher.showNext();
+        }
+    }
+
     public Cursor swapCursor(Cursor c) {
         if (mCursor == c) {
+            showItems(false);
             return null;
         }
         Cursor temp = mCursor;
@@ -133,6 +145,7 @@ public class InvoiceCursorAdapter extends RecyclerView.Adapter<InvoiceCursorAdap
         if (c != null) {
             this.notifyDataSetChanged();
         }
+        showItems(getItemCount() > 0);
         return temp;
     }
 
