@@ -50,10 +50,10 @@
             android:name=".sync.InvoiceReminderIntentService"
             android:exported="false"/>
 
-        <receiver android:name=".sync.DeviceBootReceiver"
-            android:enabled="false">
+        <receiver android:name=".sync.DeviceBootReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <category android:name="android.intent.category.HOME" />
             </intent-filter>
         </receiver>
 
