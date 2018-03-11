@@ -6,7 +6,7 @@
     <ScrollView
     android:id="@+id/scroll"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -16,9 +16,25 @@
     tools:context="com.zubala.rafal.invoicereminder.InvoiceActivity">
 
     <EditText
+        android:id="@+id/descriptionField"
+        style="@style/InvoiceLabelStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/activity_vertical_margin"
+        android:layout_marginStart="@dimen/activity_vertical_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin_double"
+        android:gravity="bottom"
+        android:hint="@string/desciption_label"
+        android:singleLine="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent" />
+
+    <EditText
         android:id="@+id/dateField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="@dimen/activity_vertical_margin_double"
         android:layout_marginEnd="@dimen/activity_vertical_margin"
         android:layout_marginStart="@dimen/activity_vertical_margin"
         android:layout_marginLeft="@dimen/activity_vertical_margin"
@@ -29,22 +45,10 @@
         android:hint="@string/date_label"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionField"
         style="@style/InvoiceLabelStyle" />
 
-        <EditText
-            android:id="@+id/descriptionField"
-            style="@style/InvoiceLabelStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/activity_vertical_margin"
-            android:layout_marginStart="@dimen/activity_vertical_margin"
-            android:layout_marginTop="@dimen/activity_vertical_margin_double"
-            android:hint="@string/desciption_label"
-            android:singleLine="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dateField" />
+
 
     <EditText
         android:id="@+id/numberField"
@@ -59,7 +63,7 @@
         android:hint="@string/amount_label"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionField"
+        app:layout_constraintTop_toBottomOf="@+id/dateField"
         style="@style/InvoiceLabelAmountStyle" />
 
     <EditText
@@ -73,7 +77,7 @@
         android:text="@string/default_currency"
         android:hint="@string/currency_label"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionField" />
+        app:layout_constraintTop_toBottomOf="@+id/dateField" />
 
 
         <Switch
@@ -84,7 +88,7 @@
             android:layout_marginStart="@dimen/activity_vertical_margin"
             android:layout_marginLeft="@dimen/activity_vertical_margin"
             android:layout_marginTop="@dimen/activity_vertical_margin_double"
-            android:switchMinWidth="60dp"
+            android:switchMinWidth="50dp"
             android:text="@string/not_paid_label"
             android:onClick="onClickPaid"
             app:layout_constraintStart_toStartOf="parent"
