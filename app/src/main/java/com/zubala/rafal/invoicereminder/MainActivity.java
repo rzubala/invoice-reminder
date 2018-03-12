@@ -3,6 +3,7 @@ package com.zubala.rafal.invoicereminder;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -22,6 +23,8 @@ import android.view.MenuItem;
 import android.widget.ViewSwitcher;
 
 import com.zubala.rafal.invoicereminder.data.InvoiceContract;
+import com.zubala.rafal.invoicereminder.data.InvoiceDbHelper;
+import com.zubala.rafal.invoicereminder.data.TestUtil;
 import com.zubala.rafal.invoicereminder.utils.AlarmUtils;
 import com.zubala.rafal.invoicereminder.utils.NotificationUtils;
 
@@ -88,7 +91,10 @@ public class MainActivity
             actionBar.setDisplayShowHomeEnabled(true);
         }
 
-        getSupportLoaderManager().initLoader(INVOICE_LOADER_ID, null, this);
+        //getSupportLoaderManager().initLoader(INVOICE_LOADER_ID, null, this);
+        InvoiceDbHelper mInvoiceDbHelper = new InvoiceDbHelper(this);
+        SQLiteDatabase db = mInvoiceDbHelper.getWritableDatabase();
+        TestUtil.insertFakeData(db, true);
     }
 
     @Override
