@@ -24,7 +24,9 @@ public class TestUtil {
         "Cell phone bill",
         "Invoice No. 12345/2018",
         "Gas bill",
-        "Internet bill"
+        "Loan repayment",
+        "Internet bill",
+        "Credit card repayment"
     };
 
     private static final String[] titlesPl = new String[] {
@@ -35,7 +37,9 @@ public class TestUtil {
         "Faktura za telefon komórkowy",
         "Faktura nr 12345/2018",
         "Faktura za gaz",
-        "Faktura za internet"
+        "Spłata pożyczki",
+        "Faktura za internet",
+        "Spłata karty kredytowej"
     };
 
     private static final Double[] amounts = new Double[] {
@@ -46,7 +50,9 @@ public class TestUtil {
         78.98,
         1235.32,
         23.87,
-        50.00
+        500.00,
+        60.00,
+        234.22
     };
 
     private static final int[] offsets = new int[] {
@@ -57,7 +63,9 @@ public class TestUtil {
         3,
         30,
         -2,
-        6
+        7,
+        6,
+        10
     };
 
     private static final boolean[] paid = new boolean[] {
@@ -68,6 +76,8 @@ public class TestUtil {
             true,
             false,
             false,
+            false,
+            true,
             true
     };
 
