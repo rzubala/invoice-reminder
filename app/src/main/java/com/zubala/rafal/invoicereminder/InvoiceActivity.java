@@ -24,7 +24,9 @@ import com.zubala.rafal.invoicereminder.databinding.ActivityInvoiceBinding;
 import com.zubala.rafal.invoicereminder.utils.NumberUtils;
 
 import java.util.Calendar;
+import java.util.Currency;
 import java.util.Date;
+import java.util.Locale;
 
 public class InvoiceActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -73,6 +75,8 @@ public class InvoiceActivity extends AppCompatActivity implements LoaderManager.
             mBinding.delete.setColorFilter(R.color.colorGray);
             mBinding.delete.setBackgroundColor(getResources().getColor(R.color.colorLightGray));
             Log.d(TAG, "mURI null");
+
+            setLocaleCurrencyCode();
         } else {
             Log.d(TAG, "mURI: " + mUri.toString());
             mBinding.delete.setColorFilter(getResources().getColor(R.color.colorRed));
@@ -82,6 +86,19 @@ public class InvoiceActivity extends AppCompatActivity implements LoaderManager.
         }
 
         attachDatePicker();
+    }
+
+    private void setLocaleCurrencyCode() {
+        Locale defaultLocale = Locale.getDefault();
+        Currency currency = Currency.getInstance(defaultLocale);
+        if (currency == null) {
+            return;
+        }
+        String code = currency.getCurrencyCode();
+        if (code == null) {
+            return;
+        }
+        mBinding.currencyField.setText(code);
     }
 
     private void attachDatePicker() {
