@@ -97,6 +97,10 @@ public class SettingsFragment extends PreferenceFragmentCompat implements OnShar
             String stringDays = (String) newValue;
             try {
                 int days = Integer.parseInt(stringDays);
+                if (days <= 0) {
+                    error.show();
+                    return false;
+                }
                 return true;
             } catch (NumberFormatException nfe) {
                 error.show();
