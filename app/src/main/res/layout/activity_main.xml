@@ -43,7 +43,7 @@
         android:visibility="invisible"
         app:elevation="@dimen/fab_elevation"
         app:pressedTranslationZ="@dimen/fab_translation_Z"
-        app:srcCompat="@android:drawable/ic_input_add"
+        app:srcCompat="@drawable/ic_schedule_white_24px"
         android:tint="@android:color/white"
         app:backgroundTint="@color/colorPrimaryLight"/>
 
