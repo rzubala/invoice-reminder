@@ -66,7 +66,7 @@ public class InvoiceCursorAdapter extends RecyclerView.Adapter<InvoiceCursorAdap
         mCursor.moveToPosition(position);
         boolean paid = mCursor.getInt(paidIndex) > 0;
         Long timestamp = mCursor.getLong(dateIndex);
-        Long todayTimestamp = InvoiceContract.InvoiceEntry.getSqlSelectionForToday();
+        Long todayTimestamp = DateUtils.getSqlSelectionForToday();
         if (!paid && timestamp <= todayTimestamp) {
             return VIEW_TYPE_TODAY;
         }

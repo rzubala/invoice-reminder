@@ -24,6 +24,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ViewSwitcher;
 
 import com.zubala.rafal.invoicereminder.data.InvoiceContract;
+import com.zubala.rafal.invoicereminder.utils.DateUtils;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -203,7 +204,7 @@ public class MainActivity
             list.add(""+0);
         }
         if (!showHistory) {
-            list.add(""+InvoiceContract.InvoiceEntry.getSqlSelectionForToday());
+            list.add(""+ DateUtils.getSqlSelectionForToday());
             list.add(""+0);
         }
         String[] selectionArguments = list.toArray(new String[list.size()]);
