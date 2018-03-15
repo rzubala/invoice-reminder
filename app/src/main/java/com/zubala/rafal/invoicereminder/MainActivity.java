@@ -19,11 +19,11 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ViewSwitcher;
 
 import com.zubala.rafal.invoicereminder.data.InvoiceContract;
-import com.zubala.rafal.invoicereminder.utils.AlarmUtils;
-import com.zubala.rafal.invoicereminder.utils.NotificationUtils;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -31,7 +31,8 @@ import java.util.List;
 public class MainActivity
         extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<Cursor>,
-        InvoiceCursorAdapter.InvoiceOnClickHandler {
+        InvoiceCursorAdapter.InvoiceOnClickHandler,
+        View.OnClickListener {
 
     private RecyclerView mRecyclerView;
 
@@ -42,6 +43,12 @@ public class MainActivity
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private static final int INVOICE_LOADER_ID = 0;
+
+    private Boolean isFabOpen = false;
+
+    private FloatingActionButton fab, fabAddInvoice, fabAddCyclic;
+
+    private Animation fabOpen, fabClose, rotateForward, rotateBackward;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,14 +61,16 @@ public class MainActivity
         mAdapter = new InvoiceCursorAdapter(this, this, mViewSwitcher);
         mRecyclerView.setAdapter(mAdapter);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent startInvoiceActivity = new Intent(MainActivity.this, InvoiceActivity.class);
-                startActivity(startInvoiceActivity);
-            }
-        });
+        fab = (FloatingActionButton)findViewById(R.id.fab);
+        fabAddInvoice = (FloatingActionButton)findViewById(R.id.fab_add_invoice);
+        fabAddCyclic = (FloatingActionButton)findViewById(R.id.fab_add_cyclic);
+        fabOpen = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_open);
+        fabClose = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fab_close);
+        rotateForward = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.rotate_forward);
+        rotateBackward = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.rotate_backward);
+        fab.setOnClickListener(this);
+        fabAddInvoice.setOnClickListener(this);
+        fabAddCyclic.setOnClickListener(this);
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
@@ -82,7 +91,6 @@ public class MainActivity
 
         ActionBar actionBar = this.getSupportActionBar();
         if (actionBar != null) {
-            //actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setIcon(R.drawable.ic_sale_time);
             actionBar.setHomeButtonEnabled(true);
             actionBar.setDisplayShowHomeEnabled(true);
@@ -201,5 +209,40 @@ public class MainActivity
         String[] selectionArguments = list.toArray(new String[list.size()]);
 
         return selectionArguments;
+    }
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        switch (id){
+            case R.id.fab:
+                handleFabAnimation();
+                break;
+            case R.id.fab_add_invoice:
+                Intent startInvoiceActivity = new Intent(MainActivity.this, InvoiceActivity.class);
+                startActivity(startInvoiceActivity);
+                break;
+            case R.id.fab_add_cyclic:
+
+                break;
+        }
+    }
+
+    private void handleFabAnimation(){
+        if(isFabOpen){
+            fab.startAnimation(rotateBackward);
+            fabAddInvoice.startAnimation(fabClose);
+            fabAddCyclic.startAnimation(fabClose);
+            fabAddInvoice.setClickable(false);
+            fabAddCyclic.setClickable(false);
+            isFabOpen = false;
+        } else {
+            fab.startAnimation(rotateForward);
+            fabAddInvoice.startAnimation(fabOpen);
+            fabAddCyclic.startAnimation(fabOpen);
+            fabAddInvoice.setClickable(true);
+            fabAddCyclic.setClickable(true);
+            isFabOpen = true;
+        }
     }
 }
