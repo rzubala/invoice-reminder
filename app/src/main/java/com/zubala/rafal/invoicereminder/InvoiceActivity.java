@@ -36,6 +36,8 @@ public class InvoiceActivity extends AppCompatActivity implements LoaderManager.
 
     private Uri mUri;
 
+    private Date mDate;
+
     private Integer id = null;
 
     private static final String TAG = InvoiceActivity.class.getSimpleName();
@@ -115,7 +117,9 @@ public class InvoiceActivity extends AppCompatActivity implements LoaderManager.
         mBinding.dateField.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO saved date
+                if (mDate != null) {
+                    myCalendar.setTime(mDate);
+                }
                 new DatePickerDialog(InvoiceActivity.this, date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
@@ -238,9 +242,9 @@ public class InvoiceActivity extends AppCompatActivity implements LoaderManager.
         mBinding.checkBox.setChecked(paid);
 
         Long timestamp = data.getLong(data.getColumnIndex(InvoiceContract.InvoiceEntry.COLUMN_DATE));
-        Date date = new Date();
-        date.setTime(timestamp);
-        updateDateField(date);
+        mDate = new Date();
+        mDate.setTime(timestamp);
+        updateDateField(mDate);
 
         id = data.getInt(data.getColumnIndex(InvoiceContract.InvoiceEntry._ID));
 
