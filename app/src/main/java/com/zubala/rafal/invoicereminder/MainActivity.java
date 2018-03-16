@@ -224,7 +224,8 @@ public class MainActivity
                 startActivity(startInvoiceActivity);
                 break;
             case R.id.fab_add_cyclic:
-
+                Intent startPeriodicInvoiceActivity = new Intent(MainActivity.this, PeriodicInvoiceActivity.class);
+                startActivity(startPeriodicInvoiceActivity);
                 break;
         }
     }

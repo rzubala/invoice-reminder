@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zubala.rafal.invoicereminder.PeriodicInvoiceActivity">
+
+    <NumberPicker
+        android:id="@+id/numberPicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioButton
+        android:id="@+id/radioButtonMonth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/month"
+        app:layout_constraintBottom_toBottomOf="@+id/numberPicker"
+        app:layout_constraintEnd_toStartOf="@+id/radioButtonWeek"
+        app:layout_constraintHorizontal_bias="0.279"
+        app:layout_constraintStart_toEndOf="@+id/numberPicker"
+        app:layout_constraintTop_toTopOf="@+id/numberPicker" />
+
+    <RadioButton
+        android:id="@+id/radioButtonWeek"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/week"
+        app:layout_constraintBottom_toBottomOf="@+id/radioButtonMonth"
+        app:layout_constraintEnd_toStartOf="@+id/radioButtonDay"
+        app:layout_constraintStart_toEndOf="@+id/radioButtonMonth"
+        app:layout_constraintTop_toTopOf="@+id/radioButtonMonth" />
+
+    <RadioButton
+        android:id="@+id/radioButtonDay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/day"
+        app:layout_constraintBottom_toBottomOf="@+id/radioButtonWeek"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/radioButtonWeek"
+        app:layout_constraintTop_toTopOf="@+id/radioButtonWeek" />
+
+</android.support.constraint.ConstraintLayout>
