@@ -10,42 +10,161 @@
         android:id="@+id/numberPicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="@dimen/activity_vertical_margin_q"
+        android:layout_marginEnd="@dimen/activity_vertical_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        app:layout_constraintEnd_toStartOf="@+id/radioGroup"
+        app:layout_constraintStart_toEndOf="@+id/textViewFrequency"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <RadioButton
-        android:id="@+id/radioButtonMonth"
+    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/radioGroup"
+        android:layout_width="120dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="@dimen/activity_vertical_margin"
+        android:layout_marginStart="@dimen/activity_vertical_margin"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/numberPicker"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/numberPicker"
+        app:layout_constraintTop_toTopOf="@+id/numberPicker">
+
+        <RadioButton
+            android:id="@+id/radioButtonMonth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/month"
+
+            app:layout_constraintBottom_toBottomOf="@+id/numberPicker"
+            app:layout_constraintEnd_toStartOf="@+id/radioButtonWeek"
+            app:layout_constraintStart_toEndOf="@+id/numberPicker"
+            app:layout_constraintTop_toTopOf="@+id/numberPicker" />
+
+        <RadioButton
+            android:id="@+id/radioButtonWeek"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/week"
+            app:layout_constraintBottom_toBottomOf="@+id/radioButtonMonth"
+            app:layout_constraintEnd_toStartOf="@+id/radioButtonDay"
+            app:layout_constraintStart_toEndOf="@+id/radioButtonMonth"
+            app:layout_constraintTop_toTopOf="@+id/radioButtonMonth" />
+
+        <RadioButton
+            android:id="@+id/radioButtonDay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/day"
+            app:layout_constraintBottom_toBottomOf="@+id/radioButtonWeek"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/radioButtonWeek"
+            app:layout_constraintTop_toTopOf="@+id/radioButtonWeek" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/textViewFrequency"
+        style="@style/InvoiceLabelStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/month"
+        android:layout_marginStart="@dimen/activity_vertical_margin_half"
+        android:layout_marginEnd="@dimen/activity_vertical_margin_q"
+        android:text="@string/payment_frequency"
         app:layout_constraintBottom_toBottomOf="@+id/numberPicker"
-        app:layout_constraintEnd_toStartOf="@+id/radioButtonWeek"
-        app:layout_constraintHorizontal_bias="0.279"
-        app:layout_constraintStart_toEndOf="@+id/numberPicker"
+        app:layout_constraintEnd_toStartOf="@+id/numberPicker"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/numberPicker" />
 
-    <RadioButton
-        android:id="@+id/radioButtonWeek"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/descriptionField"
+        style="@style/InvoiceLabelStyle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/week"
-        app:layout_constraintBottom_toBottomOf="@+id/radioButtonMonth"
-        app:layout_constraintEnd_toStartOf="@+id/radioButtonDay"
-        app:layout_constraintStart_toEndOf="@+id/radioButtonMonth"
-        app:layout_constraintTop_toTopOf="@+id/radioButtonMonth" />
-
-    <RadioButton
-        android:id="@+id/radioButtonDay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/day"
-        app:layout_constraintBottom_toBottomOf="@+id/radioButtonWeek"
+        android:layout_marginEnd="@dimen/activity_vertical_margin"
+        android:layout_marginStart="@dimen/activity_vertical_margin"
+        android:layout_marginTop="8dp"
+        android:gravity="top|left"
+        android:hint="@string/desciption_label"
+        android:inputType="textMultiLine"
+        android:lines="20"
+        android:minLines="1"
+        android:scrollHorizontally="false"
+        android:scrollbars="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/radioButtonWeek"
-        app:layout_constraintTop_toTopOf="@+id/radioButtonWeek" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/numberPicker" />
+
+    <EditText
+        android:id="@+id/numberField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/activity_vertical_amount_right_margin"
+        android:layout_marginRight="@dimen/activity_vertical_amount_right_margin"
+        android:layout_marginStart="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin_double"
+        android:inputType="numberDecimal"
+        android:hint="@string/amount_label"
+        android:gravity="bottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionField"
+        style="@style/InvoiceLabelAmountStyle" />
+
+    <EditText
+        android:id="@+id/currencyField"
+        style="@style/InvoiceLabelStyle"
+        android:layout_width="@dimen/activity_vertical_currency"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:layout_marginEnd="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_vertical_margin"
+        android:gravity="bottom"
+        android:hint="@string/currency_label"
+        android:text="@string/default_currency"
+        app:layout_constraintBottom_toBottomOf="@+id/numberField"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <Switch
+        android:id="@+id/checkBox"
+        style="@style/InvoiceLabelStyle"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin_double"
+        android:switchMinWidth="50dp"
+        android:text="@string/not_paid_label"
+        android:onClick="onClickPaid"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/numberField" />
+
+    <Button
+        android:id="@+id/button"
+        style="@style/TextAppearance.AppCompat.Medium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/activity_vertical_margin"
+        android:layout_marginStart="@dimen/activity_vertical_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin_double"
+        android:background="@color/colorPrimary"
+        android:drawableLeft="@drawable/ic_content_save_white_24dp"
+        android:onClick="onClickAddInvoice"
+        android:paddingLeft="@dimen/activity_vertical_margin"
+        android:text="@string/add"
+        android:textColor="@android:color/primary_text_dark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+
+
 
 </android.support.constraint.ConstraintLayout>

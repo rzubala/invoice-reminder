@@ -36,5 +36,5 @@
     <string name="month">Miesiąc</string>
     <string name="week">Tydzień</string>
     <string name="day">Dzień</string>
-
+    <string name="payment_frequency">Płatność co:</string>
 </resources>
