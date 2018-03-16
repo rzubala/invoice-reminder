@@ -50,16 +50,26 @@ public class DateUtils {
         return calendar.getTimeInMillis();
     }
 
+    public static long toDate(int year, int month, int day) {
+        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+        calendar.set(year, month - 1, day, 0, 0, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        return DateUtils.normalizeDate(calendar.getTimeInMillis());
+    }
+
+    public static long toUTCTimestamp(Date date) {
+        Calendar calendarDate = Calendar.getInstance();
+        calendarDate.setTime(date);
+        return toDate(calendarDate.get(Calendar.YEAR), calendarDate.get(Calendar.MONTH) + 1, calendarDate.get(Calendar.DAY_OF_MONTH));
+    }
+
     public static long getSqlSelectionForToday() {
-        long normalizedUtcNow = normalizeDate(System.currentTimeMillis(), false);
+        long normalizedUtcNow = normalizeDate(System.currentTimeMillis());
         return normalizedUtcNow;
     }
 
-    public static long normalizeDate(long date, boolean increment) {
+    public static long normalizeDate(long date) {
         long daysSinceEpoch = elapsedDaysSinceEpoch(date);
-        if (increment) {
-            daysSinceEpoch++;
-        }
         long millisFromEpochToTodayAtMidnightUtc = daysSinceEpoch * DAY_IN_MILLIS;
         return millisFromEpochToTodayAtMidnightUtc;
     }

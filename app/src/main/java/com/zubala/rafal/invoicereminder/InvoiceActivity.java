@@ -115,6 +115,7 @@ public class InvoiceActivity extends AppCompatActivity implements LoaderManager.
         mBinding.dateField.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //TODO saved date
                 new DatePickerDialog(InvoiceActivity.this, date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
@@ -172,6 +173,7 @@ public class InvoiceActivity extends AppCompatActivity implements LoaderManager.
             Toast.makeText(getBaseContext(), getString(R.string.newDateError), Toast.LENGTH_LONG).show();
             return;
         }
+        long timestamp = DateUtils.toUTCTimestamp(date);
 
         Double amount = null;
         try {
@@ -182,7 +184,7 @@ public class InvoiceActivity extends AppCompatActivity implements LoaderManager.
         }
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(InvoiceContract.InvoiceEntry.COLUMN_DATE, DateUtils.normalizeDate(date.getTime(), true));
+        contentValues.put(InvoiceContract.InvoiceEntry.COLUMN_DATE, timestamp);
         contentValues.put(InvoiceContract.InvoiceEntry.COLUMN_DESCRIPTION, description);
         contentValues.put(InvoiceContract.InvoiceEntry.COLUMN_CURRENCY, currency);
         contentValues.put(InvoiceContract.InvoiceEntry.COLUMN_AMOUNT, amount);
