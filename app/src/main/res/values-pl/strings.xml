@@ -5,6 +5,8 @@
     <string name="invoice">Płatność</string>
     <string name="pref_show_paid_label">Pokaż zapłacone</string>
     <string name="date_label">Data płatności</string>
+    <string name="date_label_from">Data od</string>
+    <string name="date_label_to">Data do</string>
     <string name="desciption_label">Opis płatności</string>
     <string name="amount_label">Kwota płatności</string>
     <string name="currency_label">Waluta</string>
