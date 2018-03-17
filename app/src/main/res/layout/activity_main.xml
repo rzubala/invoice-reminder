@@ -23,12 +23,51 @@
                 android:gravity="center"
                 style="@style/StyleEmptyItems"/>
     </ViewSwitcher>
+<!--
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@android:drawable/ic_input_add"
+        android:tint="@android:color/white"/>
+-->
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_add_cyclic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/fab_margin_2"
+        android:layout_gravity="bottom|end"
+        android:layout_marginRight="@dimen/fab_margin"
+        android:visibility="invisible"
+        app:elevation="@dimen/fab_elevation"
+        app:pressedTranslationZ="@dimen/fab_translation_Z"
+        app:srcCompat="@drawable/ic_schedule_white_24px"
+        android:tint="@android:color/white"
+        app:backgroundTint="@color/colorPrimaryLight"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_add_invoice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/fab_margin_1"
+        android:layout_gravity="bottom|end"
+        android:layout_marginRight="@dimen/fab_margin"
+        android:visibility="invisible"
+        app:elevation="@dimen/fab_elevation"
+        app:pressedTranslationZ="@dimen/fab_translation_Z"
+        app:srcCompat="@android:drawable/ic_input_add"
+        android:tint="@android:color/white"
+        app:backgroundTint="@color/colorPrimaryLight" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
+        app:elevation="@dimen/fab_elevation"
+        app:pressedTranslationZ="@dimen/fab_translation_Z"
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@android:drawable/ic_input_add"
         android:tint="@android:color/white"/>

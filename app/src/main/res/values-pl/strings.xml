@@ -5,6 +5,8 @@
     <string name="invoice">Płatność</string>
     <string name="pref_show_paid_label">Pokaż zapłacone</string>
     <string name="date_label">Data płatności</string>
+    <string name="date_label_from">Data od</string>
+    <string name="date_label_to">Data do</string>
     <string name="desciption_label">Opis płatności</string>
     <string name="amount_label">Kwota płatności</string>
     <string name="currency_label">Waluta</string>
@@ -25,6 +27,7 @@
     <string name="not_paid_label">Brak zapłaty</string>
     <string name="app_name_space">" Zapłać na czas"</string>
     <string name="invoice_space">" Płatność"</string>
+    <string name="periodic_invoice_space"> Dodaj cyklicznie</string>
     <string name="reminder_notification_title">Zapłać na czas</string>
     <string name="reminder_notification_body">Faktura do zapłacenia:</string>
     <string name="action_pay">Zaznacz płatność</string>
@@ -32,5 +35,10 @@
     <string name="pref_notification_time_label">Czas powiadomienia</string>
     <string name="pref_days_before_notification_label">Liczba dni przed powiadomieniem</string>
     <string name="no_invoices">Brak płatności</string>
-
+    <string name="month">Miesiąc</string>
+    <string name="week">Tydzień</string>
+    <string name="day">Dzień</string>
+    <string name="payment_frequency">Płatność co:</string>
+    <string name="dates_error">Data DO musi być późniejsza niż Data OD</string>
+    <string name="periodic_limit_warning">Osiągnięto limit płatności cyklicznych</string>
 </resources>

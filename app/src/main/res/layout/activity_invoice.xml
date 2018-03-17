@@ -65,23 +65,25 @@
         android:layout_marginTop="@dimen/activity_vertical_margin_double"
         android:inputType="numberDecimal"
         android:hint="@string/amount_label"
+        android:gravity="bottom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dateField"
         style="@style/InvoiceLabelAmountStyle" />
 
-    <EditText
-        android:id="@+id/currencyField"
-        style="@style/InvoiceLabelAmountStyle"
-        android:layout_width="@dimen/activity_vertical_currency"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/activity_vertical_margin"
-        android:layout_marginRight="@dimen/activity_vertical_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin_double"
-        android:text="@string/default_currency"
-        android:hint="@string/currency_label"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateField" />
+        <EditText
+            android:id="@+id/currencyField"
+            style="@style/InvoiceLabelStyle"
+            android:layout_width="@dimen/activity_vertical_currency"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
+            android:layout_marginEnd="@dimen/activity_vertical_margin"
+            android:layout_marginRight="@dimen/activity_vertical_margin"
+            android:gravity="bottom"
+            android:hint="@string/currency_label"
+            android:text="@string/default_currency"
+            app:layout_constraintBottom_toBottomOf="@+id/numberField"
+            app:layout_constraintEnd_toEndOf="parent" />
 
 
         <Switch

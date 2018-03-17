@@ -36,6 +36,8 @@ public class InvoiceActivity extends AppCompatActivity implements LoaderManager.
 
     private Uri mUri;
 
+    private Date mDate;
+
     private Integer id = null;
 
     private static final String TAG = InvoiceActivity.class.getSimpleName();
@@ -115,6 +117,9 @@ public class InvoiceActivity extends AppCompatActivity implements LoaderManager.
         mBinding.dateField.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mDate != null) {
+                    myCalendar.setTime(mDate);
+                }
                 new DatePickerDialog(InvoiceActivity.this, date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
@@ -130,6 +135,7 @@ public class InvoiceActivity extends AppCompatActivity implements LoaderManager.
         if (id == android.R.id.home) {
             NavUtils.navigateUpFromSameTask(this);
         }
+        MainActivity.hideKeyboard(this);
         return super.onOptionsItemSelected(item);
     }
 
@@ -143,6 +149,8 @@ public class InvoiceActivity extends AppCompatActivity implements LoaderManager.
     }
 
     public void onClickDeleteInvoice(View view) {
+        MainActivity.hideKeyboard(this);
+
         if (id == null) {
             finish();
         }
@@ -156,6 +164,8 @@ public class InvoiceActivity extends AppCompatActivity implements LoaderManager.
     }
 
     public void onClickAddInvoice(View view) {
+        MainActivity.hideKeyboard(this);
+
         String dateStr = mBinding.dateField.getText().toString();
         String description = mBinding.descriptionField.getText().toString();
         String amountStr = mBinding.numberField.getText().toString();
@@ -172,6 +182,7 @@ public class InvoiceActivity extends AppCompatActivity implements LoaderManager.
             Toast.makeText(getBaseContext(), getString(R.string.newDateError), Toast.LENGTH_LONG).show();
             return;
         }
+        long timestamp = DateUtils.toUTCTimestamp(date);
 
         Double amount = null;
         try {
@@ -182,7 +193,7 @@ public class InvoiceActivity extends AppCompatActivity implements LoaderManager.
         }
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(InvoiceContract.InvoiceEntry.COLUMN_DATE, InvoiceContract.InvoiceEntry.normalizeDate(date.getTime(), true));
+        contentValues.put(InvoiceContract.InvoiceEntry.COLUMN_DATE, timestamp);
         contentValues.put(InvoiceContract.InvoiceEntry.COLUMN_DESCRIPTION, description);
         contentValues.put(InvoiceContract.InvoiceEntry.COLUMN_CURRENCY, currency);
         contentValues.put(InvoiceContract.InvoiceEntry.COLUMN_AMOUNT, amount);
@@ -236,9 +247,9 @@ public class InvoiceActivity extends AppCompatActivity implements LoaderManager.
         mBinding.checkBox.setChecked(paid);
 
         Long timestamp = data.getLong(data.getColumnIndex(InvoiceContract.InvoiceEntry.COLUMN_DATE));
-        Date date = new Date();
-        date.setTime(timestamp);
-        updateDateField(date);
+        mDate = new Date();
+        mDate.setTime(timestamp);
+        updateDateField(mDate);
 
         id = data.getInt(data.getColumnIndex(InvoiceContract.InvoiceEntry._ID));
 

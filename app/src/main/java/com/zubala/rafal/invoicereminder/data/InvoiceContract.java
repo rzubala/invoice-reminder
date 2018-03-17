@@ -5,6 +5,7 @@ import android.provider.BaseColumns;
 import android.util.Log;
 
 import com.zubala.rafal.invoicereminder.utils.AlarmUtils;
+import com.zubala.rafal.invoicereminder.utils.DateUtils;
 
 import java.util.concurrent.TimeUnit;
 
@@ -34,30 +35,10 @@ public class InvoiceContract {
 
         public static final String COLUMN_PAID = "paid";
 
-        public static final long DAY_IN_MILLIS = TimeUnit.DAYS.toMillis(1);
-
         public static Uri buildInvoiceUriWithId(long id) {
             return CONTENT_URI.buildUpon()
                     .appendPath(""+id)
                     .build();
-        }
-
-        public static long getSqlSelectionForToday() {
-            long normalizedUtcNow = normalizeDate(System.currentTimeMillis(), false);
-            return normalizedUtcNow;
-        }
-
-        public static long normalizeDate(long date, boolean increment) {
-            long daysSinceEpoch = elapsedDaysSinceEpoch(date);
-            if (increment) {
-                daysSinceEpoch++;
-            }
-            long millisFromEpochToTodayAtMidnightUtc = daysSinceEpoch * DAY_IN_MILLIS;
-            return millisFromEpochToTodayAtMidnightUtc;
-        }
-
-        private static long elapsedDaysSinceEpoch(long utcDate) {
-            return TimeUnit.MILLISECONDS.toDays(utcDate);
         }
     }
 }

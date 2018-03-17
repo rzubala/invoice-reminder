@@ -29,6 +29,7 @@ import com.zubala.rafal.invoicereminder.MainActivity;
 import com.zubala.rafal.invoicereminder.R;
 import com.zubala.rafal.invoicereminder.data.InvoiceContract;
 import com.zubala.rafal.invoicereminder.utils.AlarmUtils;
+import com.zubala.rafal.invoicereminder.utils.DateUtils;
 import com.zubala.rafal.invoicereminder.utils.NotificationUtils;
 
 import java.util.Calendar;
@@ -108,8 +109,8 @@ public class ReminderTasks {
         List<String> list = new LinkedList<String>();
         list.add(""+0);
 
-        long todayTimestamp = InvoiceContract.InvoiceEntry.getSqlSelectionForToday();
-        todayTimestamp += days * InvoiceContract.InvoiceEntry.DAY_IN_MILLIS;
+        long todayTimestamp = DateUtils.getSqlSelectionForToday();
+        todayTimestamp = DateUtils.addDays(todayTimestamp, days);
         list.add(""+todayTimestamp);
 
         Log.d(AlarmUtils.TAG, "Invoices timestamp: " + todayTimestamp);
