@@ -44,4 +44,6 @@
     <string name="week">Week</string>
     <string name="day">Day</string>
     <string name="payment_frequency">Payment every:</string>
+    <string name="dates_error">\'Date to\' must be after \'Date from\'</string>
+    <string name="periodic_limit_warning">the recurring payment limit has been reached</string>
 </resources>

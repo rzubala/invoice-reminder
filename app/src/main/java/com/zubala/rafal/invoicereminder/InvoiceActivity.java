@@ -135,6 +135,7 @@ public class InvoiceActivity extends AppCompatActivity implements LoaderManager.
         if (id == android.R.id.home) {
             NavUtils.navigateUpFromSameTask(this);
         }
+        MainActivity.hideKeyboard(this);
         return super.onOptionsItemSelected(item);
     }
 
@@ -148,6 +149,8 @@ public class InvoiceActivity extends AppCompatActivity implements LoaderManager.
     }
 
     public void onClickDeleteInvoice(View view) {
+        MainActivity.hideKeyboard(this);
+
         if (id == null) {
             finish();
         }
@@ -161,6 +164,8 @@ public class InvoiceActivity extends AppCompatActivity implements LoaderManager.
     }
 
     public void onClickAddInvoice(View view) {
+        MainActivity.hideKeyboard(this);
+
         String dateStr = mBinding.dateField.getText().toString();
         String description = mBinding.descriptionField.getText().toString();
         String amountStr = mBinding.numberField.getText().toString();

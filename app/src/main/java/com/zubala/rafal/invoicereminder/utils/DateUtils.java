@@ -77,4 +77,16 @@ public class DateUtils {
     private static long elapsedDaysSinceEpoch(long utcDate) {
         return TimeUnit.MILLISECONDS.toDays(utcDate);
     }
+
+    public static String toDateStr(long timestamp) {
+        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+        calendar.setTimeInMillis(timestamp);
+        return calendar.get(Calendar.YEAR)+"-"
+                +String.format("%02d", calendar.get(Calendar.MONTH)+1)
+                +"-"+String.format("%02d", calendar.get(Calendar.DAY_OF_MONTH))
+                + " " + String.format("%02d", calendar.get(Calendar.HOUR_OF_DAY))
+                +":"+String.format("%02d", calendar.get(Calendar.MINUTE))
+                +":"+String.format("%02d", calendar.get(Calendar.SECOND))
+                +"."+String.format("%02d", calendar.get(Calendar.MILLISECOND));
+    }
 }

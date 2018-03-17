@@ -22,6 +22,7 @@ import com.zubala.rafal.invoicereminder.data.InvoiceContract;
 import com.zubala.rafal.invoicereminder.databinding.ActivityInvoiceBinding;
 import com.zubala.rafal.invoicereminder.databinding.ActivityPeriodicInvoiceBinding;
 import com.zubala.rafal.invoicereminder.utils.DateUtils;
+import com.zubala.rafal.invoicereminder.utils.PeriodicUtils;
 
 import java.util.Calendar;
 import java.util.Currency;
@@ -55,13 +56,6 @@ public class PeriodicInvoiceActivity extends AppCompatActivity {
         mBinding.numberPicker.setMaxValue(12);
         mBinding.numberPicker.setWrapSelectorWheel(true);
 
-        mBinding.numberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-            @Override
-            public void onValueChange(NumberPicker picker, int oldVal, int newVal){
-                //tv.setText("Selected Number : " + newVal);
-            }
-        });
-
         mBinding.radioButtonMonth.setChecked(true);
 
         setLocaleCurrencyCode();
@@ -75,6 +69,7 @@ public class PeriodicInvoiceActivity extends AppCompatActivity {
         if (id == android.R.id.home) {
             NavUtils.navigateUpFromSameTask(this);
         }
+        MainActivity.hideKeyboard(this);
         return super.onOptionsItemSelected(item);
     }
 
@@ -143,12 +138,18 @@ public class PeriodicInvoiceActivity extends AppCompatActivity {
     }
 
     public void onClickAddInvoice(View view) {
+        MainActivity.hideKeyboard(this);
+
         String dateFromStr = mBinding.dateFieldFrom.getText().toString();
         String dateToStr = mBinding.dateFieldTo.getText().toString();
         String description = mBinding.descriptionField.getText().toString();
         String amountStr = mBinding.numberField.getText().toString();
         String currency = mBinding.currencyField.getText().toString();
         boolean paid = mBinding.checkBox.isChecked();
+        int frequency = mBinding.numberPicker.getValue();
+        boolean month = mBinding.radioButtonMonth.isChecked();
+        boolean week = mBinding.radioButtonWeek.isChecked();
+        boolean day = mBinding.radioButtonDay.isChecked();
 
         if (description.isEmpty() || amountStr.isEmpty() || dateFromStr.isEmpty() || dateToStr.isEmpty()) {
             Toast.makeText(getBaseContext(), getString(R.string.newInvoiceError), Toast.LENGTH_LONG).show();
@@ -177,16 +178,25 @@ public class PeriodicInvoiceActivity extends AppCompatActivity {
         }
         long timestampTo = DateUtils.toUTCTimestamp(dateTo);
 
-        /*
+        if (timestampTo <= timestampFrom) {
+            Toast.makeText(getBaseContext(), getString(R.string.dates_error), Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        PeriodicUtils.PeriodicType type = PeriodicUtils.PeriodicType.MONTH;
+        if (week) {
+            type = PeriodicUtils.PeriodicType.WEEK;
+        } else if (day) {
+            type = PeriodicUtils.PeriodicType.DAY;
+        }
+
         ContentValues contentValues = new ContentValues();
-        contentValues.put(InvoiceContract.InvoiceEntry.COLUMN_DATE, timestamp);
         contentValues.put(InvoiceContract.InvoiceEntry.COLUMN_DESCRIPTION, description);
         contentValues.put(InvoiceContract.InvoiceEntry.COLUMN_CURRENCY, currency);
         contentValues.put(InvoiceContract.InvoiceEntry.COLUMN_AMOUNT, amount);
         contentValues.put(InvoiceContract.InvoiceEntry.COLUMN_PAID, paid);
 
-        Uri uri = getContentResolver().insert(InvoiceContract.InvoiceEntry.CONTENT_URI, contentValues);
-        */
+        PeriodicUtils.createPeriodicPayments(this, timestampFrom, timestampTo, type, frequency, contentValues);
 
         finish();
     }

@@ -39,4 +39,6 @@
     <string name="week">Tydzień</string>
     <string name="day">Dzień</string>
     <string name="payment_frequency">Płatność co:</string>
+    <string name="dates_error">Data DO musi być późniejsza niż Data OD</string>
+    <string name="periodic_limit_warning">Osiągnięto limit płatności cyklicznych</string>
 </resources>
