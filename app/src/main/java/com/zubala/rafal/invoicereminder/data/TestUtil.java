@@ -100,7 +100,7 @@ public class TestUtil {
             currency = "USD";
         }
 
-        long nowTimestamp = InvoiceContract.InvoiceEntry.getSqlSelectionForToday();
+        long nowTimestamp = DateUtils.getSqlSelectionForToday();
 
         for (int i=0;i<titles.length;i++) {
             ContentValues cv = new ContentValues();
@@ -108,7 +108,7 @@ public class TestUtil {
             cv.put(InvoiceContract.InvoiceEntry.COLUMN_AMOUNT, amounts[i]);
             cv.put(InvoiceContract.InvoiceEntry.COLUMN_PAID, paid[i]);
             cv.put(InvoiceContract.InvoiceEntry.COLUMN_CURRENCY, currency);
-            long timestamp = nowTimestamp + offsets[i] * InvoiceContract.InvoiceEntry.DAY_IN_MILLIS;
+            long timestamp = nowTimestamp + offsets[i] * DateUtils.DAY_IN_MILLIS;
             cv.put(InvoiceContract.InvoiceEntry.COLUMN_DATE, timestamp);
             list.add(cv);
         }
