@@ -54,6 +54,7 @@ public class ReminderTasks {
             checkInvoicesForNotification(context, uri);
         } else if (ACTION_OPEN_PAY_ON_TIME.equals(action)) {
             Intent mainIntent = new Intent(context, MainActivity.class);
+            mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(mainIntent);
             NotificationUtils.clearAllNotifications(context);
         }
@@ -121,6 +122,7 @@ public class ReminderTasks {
 
     private static void payInvoice(Context context, Uri uri) {
         Intent invoiceDetailIntent = new Intent(context, InvoiceActivity.class);
+        invoiceDetailIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         invoiceDetailIntent.setData(uri);
         context.startActivity(invoiceDetailIntent);
 
